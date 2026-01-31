@@ -49,7 +49,8 @@ public class CharacterParentClass : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2") && !Specialready)
         {
-            StartCoroutine(Special());
+            //StartCoroutine(Special());
+            PerformSpecial();
         }
         //death
         if (rb.position.y < -3 || rb.position.y > 3) //these values can be changed for the real board
