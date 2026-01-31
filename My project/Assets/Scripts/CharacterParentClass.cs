@@ -107,6 +107,33 @@ public class CharacterParentClass : MonoBehaviour
         float finalForce = force / weight;
         rb.AddForce(direction * finalForce, ForceMode2D.Impulse);
     }
+
+    public void changeStat(int id, int value, bool addative) //writes to player stats, when called with addative set to true, will add value instead of overwriting
+    {
+        switch (id) //not the nicest code block but should do the job
+        {
+            case 0:
+                if (addative) Speed += value;
+                else Speed = value;
+                break;
+            case 1:
+                if (addative) weight += value;
+                else weight = value;
+                break;
+            case 2:
+                if (addative) friction += value;
+                else friction = value;
+                break;
+            case 3:
+                if (addative) hitStrength += value;
+                else hitStrength = value;
+                break;
+            case 4:
+                if (addative) attackCooldown += value;
+                else attackCooldown = value;
+                break;
+        }
+    }
   
 
 
