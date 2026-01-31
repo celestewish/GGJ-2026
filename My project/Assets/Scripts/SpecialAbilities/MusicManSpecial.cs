@@ -43,11 +43,4 @@ public class MusicManSpecial : CharacterParentClass
             Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
         }
     }
-
-    // Shockwave effect
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(transform.position, specialRadius);
-    }
 }
