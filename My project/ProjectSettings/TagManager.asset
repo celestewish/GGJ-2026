@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Outside
+  - HitBox
+  - HurtBox
   layers:
   - Default
   - TransparentFX

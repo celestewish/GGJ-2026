@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class CharacterParentClass : MonoBehaviour
 {
     [Header("Movement Settings")]
@@ -22,13 +24,15 @@ public class CharacterParentClass : MonoBehaviour
     [SerializeField] protected float currentSpecial = 0f;
     [SerializeField] protected float maxSpecial = 100f;
 
-
+    public string playerID;
+   
 
 
     protected Rigidbody2D rb;
-    protected Vector2 inputVector;
+    protected Vector2 moveInput;
+    protected Vector2 lookInput;
     protected bool isAttacking = false;
-    protected bool Specialready = false;
+    protected bool specialReady = false;
 
     protected  void Awake()
     {
@@ -37,54 +41,89 @@ public class CharacterParentClass : MonoBehaviour
         rb.linearDamping = friction;
         rb.gravityScale = 0; // Assuming top-down; set to 1 for platformer
         hitBox.gameObject.SetActive(false);
-       
+        playerID = gameObject.name;
+    
     }
 
     protected virtual void Update()
     {
-        HandleInput();
-        if (Input.GetButtonDown("Fire1") && !isAttacking)
-        {
-            StartCoroutine(Attack());
-        }
-        if (Input.GetButtonDown("Fire2") && !Specialready)
-        {
-            StartCoroutine(Special());
-        }
+    
+        GainSpecial(currentSpecial);
+        Death();
      
     }
 
     protected virtual void Death()
     {
         //death
-        if (rb.position.y < -3 || rb.position.y > 3) //these values can be changed for the real board
-        {
-            this.gameObject.SetActive(false);
-        }
-        if (rb.position.x < -3 || rb.position.x > 3) //these values can be changed for the real board
+        /*    if (rb.position.y < -3 || rb.position.y > 3) //these values can be changed for the real board
+            {
+                this.gameObject.SetActive(false);
+            }
+            if (rb.position.x < -3 || rb.position.x > 3) //these values can be changed for the real board
+            {
+                this.gameObject.SetActive(false);
+            }*/
+        if (Mathf.Abs(rb.position.y) > 3 || Mathf.Abs(rb.position.x) > 3)
         {
             this.gameObject.SetActive(false);
         }
     }
 
-    protected  void FixedUpdate()
+
+    // --- Input System Events ---
+
+    public void OnMove(InputValue value)
+    {
+        moveInput = value.Get<Vector2>();
+    }
+
+    public void OnLook(InputValue value)
+    {
+        lookInput = value.Get<Vector2>();
+        if (lookInput != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+    }
+
+    public void OnAttack(InputValue value)
+    {
+        if (value.isPressed && !isAttacking && Time.time >= lastAttackTime + attackCooldown)
+        {
+            StartCoroutine(Attack());
+        }
+    }
+
+    public void OnSpecial(InputValue value)
+    {
+        if (value.isPressed && currentSpecial >= maxSpecial && !specialReady)
+        {
+            StartCoroutine(Special());
+        }
+    }
+
+
+
+    protected void FixedUpdate()
     {
         Move();
         Friction();
+        
     }
-
-    //Movement (Keyboard and Controller)
-    protected virtual void HandleInput()
+    //New Input System
+   //Movement (Keyboard and Controller)
+ /*   protected virtual void HandleInput()
     {
-        inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));// this made me change the settings to allow BOTH old and new input systems.
-    }
+       // inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));// this made me change the settings to allow BOTH old and new input systems.
+    }*/
 
     protected virtual void Move()
     {
-        Vector2 force = inputVector.normalized * Speed;// * acceleration;
-        rb.AddForce(force);
+        rb.linearVelocity = moveInput * Speed;
     }
-
+  
     //Friction
     protected virtual void Friction()
     {
@@ -111,8 +150,12 @@ public class CharacterParentClass : MonoBehaviour
         Debug.Log(gameObject.name + " attacked with strength: " + hitStrength);
         // 1. Activate Hitbox Object via animation event or script
         hitBox.gameObject.SetActive(true);
-        hitStrength = 10;//or any value
+       
       
+    }
+    public float GetStrength()
+    {
+        return hitStrength;
     }
 
     //Weight
@@ -124,10 +167,7 @@ public class CharacterParentClass : MonoBehaviour
         rb.AddForce(direction * finalForce, ForceMode2D.Impulse);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("something here" + collision.gameObject.name);
-    }
+    
 
     //special
     protected virtual void PerformSpecial()
@@ -144,14 +184,14 @@ public class CharacterParentClass : MonoBehaviour
     protected virtual IEnumerator Special()
     {
         // Check if meter is full
-        if (currentSpecial >= maxSpecial && !Specialready)
+        if (currentSpecial >= maxSpecial && !specialReady)
         {
-            Specialready = true;
+            specialReady = true;
             PerformSpecial();
             // Consume the meter
             currentSpecial = 0f;
             yield return new WaitForSeconds(1f);
-            Specialready = false;
+            specialReady = false;
             hitBox.gameObject.SetActive(false);
         }
     }
