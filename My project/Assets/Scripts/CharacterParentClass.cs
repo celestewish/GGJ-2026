@@ -49,7 +49,8 @@ public class CharacterParentClass : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2") && !Specialready)
         {
-            StartCoroutine(Special());
+            //StartCoroutine(Special());
+            PerformSpecial();
         }
      
     }
