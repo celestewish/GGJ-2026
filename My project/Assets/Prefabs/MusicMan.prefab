@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3507899999118160123}
   - component: {fileID: 5860007290717633888}
   - component: {fileID: 1478722446492287096}
+  - component: {fileID: 7564299339300290502}
   m_Layer: 0
   m_Name: MusicMan
   m_TagString: Untagged
@@ -190,6 +191,7 @@ MonoBehaviour:
   hurtbox: {fileID: 3413513604802238990}
   currentSpecial: 0
   maxSpecial: 100
+  playerID: 
   specialRadius: 3
   knockbackForce: 10
   enemyLayer:
@@ -199,6 +201,36 @@ MonoBehaviour:
   specialSfx: {fileID: 0}
   sfxVolume: 1
   shockwavePrefab: {fileID: 7266516839025931329, guid: 0b26ef686d7dc8046bb18f703ec32b1c, type: 3}
+--- !u!114 &7564299339300290502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538916734279263991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &3413513604802238990
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,18 +31,17 @@ public class DrunkSpecial : CharacterParentClass
         }
     }
 
-    // Overrides handle input to invert controls
-    protected override void HandleInput()
+    // Overrides move to invert controls
+    protected override void Move()
     {
-        Vector2 raw = new Vector2(
-            Input.GetAxisRaw("Horizontal"),
-            Input.GetAxisRaw("Vertical")
-        );
+        Vector2 finalInput = moveInput;
 
         if (controlsInverted)
-            raw *= -1f;
+        {
+            finalInput *= -1f;
+        }
 
-        inputVector = raw;
+        rb.linearVelocity = finalInput * Speed;
     }
 
     // Inverts controls for a set number of seconds
