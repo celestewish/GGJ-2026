@@ -51,6 +51,11 @@ public class CharacterParentClass : MonoBehaviour
         {
             StartCoroutine(Special());
         }
+     
+    }
+
+    protected virtual void Death()
+    {
         //death
         if (rb.position.y < -3 || rb.position.y > 3) //these values can be changed for the real board
         {
@@ -69,12 +74,12 @@ public class CharacterParentClass : MonoBehaviour
     }
 
     //Movement (Keyboard and Controller)
-    protected  void HandleInput()
+    protected virtual void HandleInput()
     {
         inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));// this made me change the settings to allow BOTH old and new input systems.
     }
 
-    protected  void Move()
+    protected virtual void Move()
     {
         Vector2 force = inputVector.normalized * Speed;// * acceleration;
         rb.AddForce(force);
@@ -117,6 +122,11 @@ public class CharacterParentClass : MonoBehaviour
         // Reduce force based on weight
         float finalForce = force / weight;
         rb.AddForce(direction * finalForce, ForceMode2D.Impulse);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("something here" + collision.gameObject.name);
     }
 
     //special
