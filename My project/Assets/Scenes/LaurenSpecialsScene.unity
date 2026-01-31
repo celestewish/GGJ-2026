@@ -310,7 +310,7 @@ MonoBehaviour:
   currentSpecial: 0
   maxSpecial: 100
   inversionChancePerSecond: 0.1
-  inversionDuration: 2
+  inversionDuration: 5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
