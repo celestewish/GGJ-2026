@@ -17,7 +17,7 @@ public class CharacterParentClass : MonoBehaviour
     [SerializeField] protected float hitStrength = 10f;
     [SerializeField] protected float attackCooldown = 1f;
     [SerializeField] protected float lastAttackTime = -999f;
-    [SerializeField] private GameObject hitBox; // Child GameObject with Collider(Trigger)
+    [SerializeField] protected GameObject hitBox; // Child GameObject with Collider(Trigger)
     [SerializeField] private GameObject hurtbox; // Child GameObject with Collider(Trigger)
     [SerializeField] protected float currentSpecial = 0f;
     [SerializeField] protected float maxSpecial = 100f;
