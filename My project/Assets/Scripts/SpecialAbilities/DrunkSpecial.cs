@@ -4,7 +4,7 @@ using UnityEngine;
 public class DrunkSpecial : CharacterParentClass
 {
     [Header("Inversion Settings")]
-    [SerializeField] private float inversionChancePerSecond = 0.8f; // 0–1
+    [SerializeField] private float inversionChancePerSecond = 0.8f; // 0ï¿½1
     [SerializeField] private float inversionDuration = 5f;
 
     private bool controlsInverted = false;
