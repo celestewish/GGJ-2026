@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharacterParentClass : MonoBehaviour
@@ -17,12 +19,16 @@ public class CharacterParentClass : MonoBehaviour
     [SerializeField] protected float lastAttackTime = -999f;
     [SerializeField] private GameObject hitBox; // Child GameObject with Collider(Trigger)
     [SerializeField] private GameObject hurtbox; // Child GameObject with Collider(Trigger)
+    [SerializeField] protected float currentSpecial = 0f;
+    [SerializeField] protected float maxSpecial = 100f;
+
 
 
 
     protected Rigidbody2D rb;
     protected Vector2 inputVector;
     protected bool isAttacking = false;
+    protected bool Specialready = false;
 
     protected  void Awake()
     {
@@ -31,6 +37,7 @@ public class CharacterParentClass : MonoBehaviour
         rb.linearDamping = friction;
         rb.gravityScale = 0; // Assuming top-down; set to 1 for platformer
         hitBox.gameObject.SetActive(false);
+       
     }
 
     protected virtual void Update()
@@ -39,6 +46,10 @@ public class CharacterParentClass : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !isAttacking)
         {
             StartCoroutine(Attack());
+        }
+        if (Input.GetButtonDown("Fire2") && !Specialready)
+        {
+            StartCoroutine(Special());
         }
         //death
         if (rb.position.y < -3 || rb.position.y > 3) //these values can be changed for the real board
@@ -107,7 +118,34 @@ public class CharacterParentClass : MonoBehaviour
         float finalForce = force / weight;
         rb.AddForce(direction * finalForce, ForceMode2D.Impulse);
     }
-  
+
+    //special
+    protected virtual void PerformSpecial()
+    {
+        Debug.Log("RAHHHHHH");
+       //PUT character special code here.
+
+    }
+    // gain meter
+    public void GainSpecial(float amount)
+    {
+        currentSpecial = Mathf.Clamp(currentSpecial + amount, 0f, maxSpecial);
+    }
+    protected virtual IEnumerator Special()
+    {
+        // Check if meter is full
+        if (currentSpecial >= maxSpecial && !Specialready)
+        {
+            Specialready = true;
+            PerformSpecial();
+            // Consume the meter
+            currentSpecial = 0f;
+            yield return new WaitForSeconds(1f);
+            Specialready = false;
+            hitBox.gameObject.SetActive(false);
+        }
+    }
+
 
 
 }
