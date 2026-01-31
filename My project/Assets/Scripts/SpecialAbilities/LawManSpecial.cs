@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class LawManSpecial : CharacterParentClass
 {
@@ -13,7 +12,7 @@ public class LawManSpecial : CharacterParentClass
     private float lastBatonTime = -999f;
     private bool isSwinging = false;
 
-    // Instead of having a special, LawMan swings his baton
+    // Instead of normal attack, LawMan swings his baton
     protected override void PerformAttack()
     {
         if (isSwinging) return;
@@ -35,30 +34,33 @@ public class LawManSpecial : CharacterParentClass
         batonObject.SetActive(true);
         hitBox.gameObject.SetActive(true);
 
-        // Decide facing direction from input
-        Vector2 dir = inputVector.sqrMagnitude > 0.01f
-            ? inputVector.normalized
-            : Vector2.right;
+        // Decide facing direction:
+        // Prefer lookInput (right stick / mouse), fall back to moveInput, then default right
+        Vector2 dir = Vector2.right;
+        if (lookInput.sqrMagnitude > 0.01f)
+            dir = lookInput.normalized;
+        else if (moveInput.sqrMagnitude > 0.01f)
+            dir = moveInput.normalized;
 
-        // Set baton facing direction
         float baseAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.identity;
-        batonObject.transform.localRotation = Quaternion.Euler(0f, 0f, baseAngle - batonSwingAngle * 0.5f);
-        // Set rotation
-        float t = 0f;
-        Quaternion startRot = batonObject.transform.localRotation;
+
+        // Do NOT zero out player rotation, OnLook in parent handles that.
+        // Just rotate the baton locally around the player.
+        Quaternion startRot = Quaternion.Euler(0f, 0f, baseAngle - batonSwingAngle * 0.5f);
         Quaternion endRot = Quaternion.Euler(0f, 0f, baseAngle + batonSwingAngle * 0.5f);
-        // Swing baton
+
+        batonObject.transform.localRotation = startRot;
+
+        float t = 0f;
         while (t < 1f)
         {
             t += Time.deltaTime / batonSwingTime;
             batonObject.transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
             yield return null;
         }
-        // Reset everything
+
         batonObject.SetActive(false);
-        isSwinging = false;
         hitBox.gameObject.SetActive(false);
+        isSwinging = false;
     }
 }
-
