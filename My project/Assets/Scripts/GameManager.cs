@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private GameObject[] playerPrefabArray;
+    public GameObject[] playerPrefabArray;
     private CharacterParentClass[] activePlayerArray = new CharacterParentClass[4]; //the positions in this array correspond to the players. 0 is player 1 and so on
-
+    public string gameSceneName;
 
     private GameState currentState;
 
@@ -18,10 +19,11 @@ public class GameManager : MonoBehaviour
         currentState = GameState.Menu;
     }
 
-    void startTheGame()
+    public void startTheGame()
     {
         currentState = GameState.Game;
         //add position spawning code here
+        SceneManager.LoadScene(gameSceneName);
     }
 
     public void setPlayer(int mask, int playerWhoChose)
