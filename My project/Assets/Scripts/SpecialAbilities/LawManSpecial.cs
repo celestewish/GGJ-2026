@@ -35,7 +35,7 @@ public class LawManSpecial : CharacterParentClass
         batonObject.SetActive(true);
         hitBox.gameObject.SetActive(true);
 
-        // Decide facing direction from input
+     /*   // Decide facing direction from input
         Vector2 dir = inputVector.sqrMagnitude > 0.01f
             ? inputVector.normalized
             : Vector2.right;
@@ -54,7 +54,7 @@ public class LawManSpecial : CharacterParentClass
             t += Time.deltaTime / batonSwingTime;
             batonObject.transform.localRotation = Quaternion.Slerp(startRot, endRot, t);
             yield return null;
-        }
+        }*/
         // Reset everything
         batonObject.SetActive(false);
         isSwinging = false;

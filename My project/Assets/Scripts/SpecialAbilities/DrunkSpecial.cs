@@ -32,7 +32,7 @@ public class DrunkSpecial : CharacterParentClass
     }
 
     // Overrides handle input to invert controls
-    protected override void HandleInput()
+ /*   protected override void HandleInput()
     {
         Vector2 raw = new Vector2(
             Input.GetAxisRaw("Horizontal"),
@@ -43,7 +43,7 @@ public class DrunkSpecial : CharacterParentClass
             raw *= -1f;
 
         inputVector = raw;
-    }
+    }*/
 
     // Inverts controls for a set number of seconds
     private IEnumerator InvertControlsTemporarily()
