@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -256,6 +257,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ac510c2e4f0ef4296c44ee8c47fdb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MultiplayerCamera
+  targets:
+  - {fileID: 1394781172}
+  - {fileID: 4650772721823238396}
+  offset: {x: 0, y: 0, z: -10}
+  smoothTime: 0.2
+  minZoom: 5
+  maxZoom: 15
+  zoomLimiter: 10
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,6 +910,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8802caa18f463da46a98b855ea9f670f, type: 3}
+--- !u!4 &4650772721823238396 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 904904295287722695, guid: 8802caa18f463da46a98b855ea9f670f, type: 3}
+  m_PrefabInstance: {fileID: 4092423162565779950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
