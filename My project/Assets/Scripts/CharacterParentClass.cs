@@ -10,6 +10,8 @@ public class CharacterParentClass : MonoBehaviour
 {
     private PlayerData playerData;
 
+    [SerializeField] protected Transform rotateTransform;
+
     [Header("Movement Settings")]
     [SerializeField] protected float Speed = 1f;
     [SerializeField] protected Animator a;
@@ -120,11 +122,18 @@ public class CharacterParentClass : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }*/
-        this.gameObject.SetActive(false);
-        playerUI.Knockout();
-        CrowdUI.CrowdCheer();
+        if (this.gameObject.activeSelf)
+        {
+            this.gameObject.SetActive(false);
+            playerUI.Knockout();
 
-        gameManager.KnockoutPlayer(playerData);
+            if (CrowdUI != null)
+            {
+                CrowdUI.CrowdCheer();
+            }
+
+            gameManager.KnockoutPlayer(playerData);
+        }
     }
 
 
@@ -218,8 +227,8 @@ public class CharacterParentClass : MonoBehaviour
         //Apply gradual rotation based on weight factor
         if (lookDir != Vector3.zero)
         {
-            Quaternion rot = Quaternion.FromToRotation(transform.up, lookDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot * transform.rotation, 1 / weight * Time.deltaTime * 25);
+            Quaternion rot = Quaternion.FromToRotation(rotateTransform.up, lookDir);
+            rotateTransform.rotation = Quaternion.Slerp(rotateTransform.rotation, rot * rotateTransform.rotation, 1 / weight * Time.deltaTime * 25);
         }
     }
   

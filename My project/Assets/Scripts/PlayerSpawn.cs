@@ -17,11 +17,7 @@ public class PlayerSpawn : MonoBehaviour
 
      void Start()
     {
-        manager = GetComponent<PlayerInputManager>();
-        foreach(Transform t in spawnPositions)
-        {
-            t.gameObject.SetActive(true);
-        }
+        //manager = GetComponent<PlayerInputManager>();
         /*index = 0;
         manager.playerPrefab = players[index];*/
     }
@@ -43,6 +39,7 @@ public class PlayerSpawn : MonoBehaviour
             PlayerData current = playerDatas[i];
             if (current.playerIndex != -1)
             {
+                print($"Spawn player {current.playerIndex}");
                 manager.playerPrefab = characterPrefabs[current.charID];
                 manager.JoinPlayer(current.playerIndex, -1, current.controlScheme, current.devices);
             }

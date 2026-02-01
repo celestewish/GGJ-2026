@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 48.8467, y: 48.8467}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7518994018037779435
 CanvasRenderer:
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -4750761433519615375, guid: 2b87a3ac83046b646b2af79e8646621c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b22c97d13629f2c45a110fb4f8393a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionCursor
+  cursorImage: {fileID: 810148396336326218}
   sensitivity: 50
 --- !u!225 &8341305838527923555
 CanvasGroup:

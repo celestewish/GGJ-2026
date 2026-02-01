@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+
     public GameObject[] playerPrefabArray;
     public Vector2[] spawnPositions; //Define in inspector
     public PlayerInputManager manager;
@@ -12,7 +15,8 @@ public class GameManager : MonoBehaviour
     private PlayerData[] pDataArray = new PlayerData[4];
     private int playersReady = 0;
     private int playersInGame = 0;
-    public string gameSceneName = "GameScene";
+    public string gameSceneName;
+    public Color[] colors;
 
     private int playersStillAlive = 0;
     private PlayerData[] remainingPlayers;
@@ -22,13 +26,39 @@ public class GameManager : MonoBehaviour
 
     private GameState currentState = GameState.Menu;
 
+    private bool gameStarting = false;
+
     public bool IsGameReady()
     {
         return playersReady == playersInGame && playersInGame >= 2;
     }
 
+    public PlayerData[] GetPlayerData()
+    {
+        return pDataArray;
+    }
+
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        } else
+        {
+            Destroy(gameObject);
+        }
+
+        manager = GetComponent<PlayerInputManager>();
+
+        for (int i = 0; i < pDataArray.Length; i++)
+        {
+            if (pDataArray[i].devices == null)
+            {
+                pDataArray[i] = new PlayerData(-1, "", null);
+                gameEndPositions[i] = new PlayerData(-1, "", null);
+            }
+        }
+
         DontDestroyOnLoad(this);
     }
 
@@ -42,26 +72,60 @@ public class GameManager : MonoBehaviour
         print("Started scene");
         if (currentState == GameState.Game)
         {
-            populatePlayersInGame();
-            remainingPlayers = pDataArray;
+            gameStarting = false;
+
+            manager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
+            manager.enabled = false;
+
+            StartCoroutine(populatePlayersInGame());
+
+            remainingPlayers = new PlayerData[4];
+            for (int i = 0; i < pDataArray.Length; i++)
+            {
+                PlayerData copy = new PlayerData();
+                copy.playerIndex = pDataArray[i].playerIndex;
+                copy.controlScheme = pDataArray[i].controlScheme;
+                copy.devices = pDataArray[i].devices;
+                copy.charID = pDataArray[i].charID;
+                copy.characterData = pDataArray[i].characterData;
+                remainingPlayers[i] = copy;
+            }
             playersStillAlive = playersInGame;
         }
         else if (currentState == GameState.Results)
         {
+            gameStarting = false;
+            manager.joinBehavior = PlayerJoinBehavior.JoinPlayersManually;
+            manager.enabled = true;
+        }
+        else if (currentState == GameState.Menu)
+        {
+            gameStarting = false;
 
+            manager.joinBehavior = PlayerJoinBehavior.JoinPlayersWhenButtonIsPressed;
+            manager.enabled = true;
+
+            cursors = new List<SelectionCursor>();
+            playersReady = 0;
+
+            for (int i = 0; i < pDataArray.Length; i++)
+            {
+                pDataArray[i].charID = -1;
+                pDataArray[i].characterData = null;
+            }
         }
     }
 
     private void Start()
     {
-        for (int i = 0; i < pDataArray.Length; i++)
+        /*for (int i = 0; i < pDataArray.Length; i++)
         {
             if (pDataArray[i].devices == null)
             {
                 pDataArray[i] = new PlayerData(-1, "", null);
                 gameEndPositions[i] = new PlayerData(-1, "", null);
             }
-        }
+        }*/
 
         /*if(currentState == GameState.Game)
         {
@@ -69,36 +133,64 @@ public class GameManager : MonoBehaviour
         }*/
     }
 
+    public void OnPlayerJoined(PlayerInput p)
+    {
+        print("Player Joined Message");
+    }
     public void playerJoin(PlayerInput p)
     {
-        pDataArray[p.playerIndex] = new PlayerData(p.playerIndex, p.currentControlScheme, p.devices.ToArray());
+        print("Player");
+        if(currentState != GameState.Menu && currentState != GameState.Results)
+        {
+            return;
+        }
+
+        if (pDataArray[p.playerIndex].playerIndex == -1)
+        {
+            print("New Player Joined");
+            pDataArray[p.playerIndex] = new PlayerData(p.playerIndex, p.currentControlScheme, p.devices.ToArray());
+            playersInGame++;
+        }
 
         SelectionCursor s = p.gameObject.GetComponent<SelectionCursor>();
-        s.transform.SetParent(FindFirstObjectByType<Canvas>().transform);
+        if (s != null)
+        {
+            s.transform.SetParent(FindFirstObjectByType<Canvas>().transform);
 
-        cursors.Add(s);
+            (s.transform as RectTransform).anchoredPosition = new Vector2(Screen.width / 2, Screen.height / 2);
+            s.SetColor(colors[p.playerIndex]);
+            cursors.Add(s);
 
-        playersInGame++;
-        //s.transform.position = Vector3.zero;
 
-        s.SetGameManager(this);
+            //s.transform.position = Vector3.zero;
+
+            s.SetGameManager(this);
+        }
     }
 
     public void startTheGame()
     {
-        currentState = GameState.Game;
-
-        for (int i = 0; i < cursors.Count; i++)
+        if (!gameStarting)
         {
-            cursors[i].gameObject.SetActive(false);
-        }
+            gameStarting = true;
 
-        //add position spawning code here
-        SceneManager.LoadScene(gameSceneName);
+            currentState = GameState.Game;
+
+            for (int i = 0; i < cursors.Count; i++)
+            {
+                cursors[i].gameObject.SetActive(false);
+            }
+
+            //add position spawning code here
+            manager.enabled = false;
+            SceneManager.LoadScene(gameSceneName);
+        }
     }
 
-    public void populatePlayersInGame()
+    public IEnumerator populatePlayersInGame()
     {
+        yield return new WaitForSeconds(0.1f);
+
         PlayerSpawn playerSpawn = FindFirstObjectByType<PlayerSpawn>();
         if(playerSpawn)
         {
@@ -137,8 +229,21 @@ public class GameManager : MonoBehaviour
     public void KnockoutPlayer(PlayerData player)
     {
         print("Knockout Player");
+        print(player.playerIndex + ", " + player.controlScheme + ", " + player.charID);
         gameEndPositions[playersStillAlive - 1] = player;
+        print("Before");
+        for (int i = 0; i < gameEndPositions.Length; i++)
+        {
+            if (gameEndPositions[i].playerIndex != -1)
+                print(gameEndPositions[i].playerIndex + " - " + gameEndPositions[i].characterData.characterName);
+        }
         remainingPlayers[player.playerIndex] = new PlayerData(-1, "", null);
+        print("After");
+        for (int i = 0; i < gameEndPositions.Length; i++)
+        {
+            if (gameEndPositions[i].playerIndex != -1)
+                print(gameEndPositions[i].playerIndex + " - " + gameEndPositions[i].characterData.characterName);
+        }
         playersStillAlive--;
 
         if(playersStillAlive == 1)
@@ -154,6 +259,12 @@ public class GameManager : MonoBehaviour
                 }
             }
 
+            for (int i = 0; i < gameEndPositions.Length; i++)
+            {
+                if (gameEndPositions[i].playerIndex != -1)
+                    print(gameEndPositions[i].playerIndex + " - " + gameEndPositions[i].characterData.characterName);
+            }
+
             //handle game end
             currentState = GameState.Results;
             SceneManager.LoadScene("EndScene");
@@ -166,8 +277,18 @@ public class GameManager : MonoBehaviour
 
     public bool SetPlayerSelection(int playerIndex, CharacterData data)
     {
+        print(pDataArray[playerIndex].charID + " - " + playerIndex);
         if (pDataArray[playerIndex].charID == -1)
         {
+            //ensure only one character type per game
+            for (int i = 0;i < pDataArray.Length;i++)
+            {
+                if (pDataArray[i].charID == data.characterID)
+                {
+                    return false;
+                }
+            }
+
             pDataArray[playerIndex].charID = data.characterID;
             pDataArray[playerIndex].characterData = data;
             playersReady++;
@@ -183,6 +304,11 @@ public class GameManager : MonoBehaviour
         playersReady--;
     }
 
+    public void LoadMainMenu()
+    {
+        currentState = GameState.Menu;
+        SceneManager.LoadScene("MainMenu");
+    }
 
     public void PauseGame()
     {

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class SelectionCursor : MonoBehaviour
 {
+    [SerializeField] Image cursorImage;
     Vector2 nav;
     PlayerInput pi;
     public int sensitivity = 10;
@@ -99,13 +100,16 @@ public class SelectionCursor : MonoBehaviour
 
                 if (this.maskSelection == null)
                 {
+                    print("No Mask Selection");
                     MaskSelection maskSelection = raycastResult.gameObject.transform.parent.GetComponent<MaskSelection>();
                     if (maskSelection)
                     {
+                        print("Found Mask Selection");
                         CharacterData characterData = maskSelection.GetCharacterData();
 
                         if (gameManager.SetPlayerSelection(pi.playerIndex, characterData))
                         {
+                            print("Mask Set Successfully");
                             this.maskSelection = maskSelection;
                             maskSelection.MaskSelected(pi.playerIndex);
 
@@ -168,6 +172,11 @@ public class SelectionCursor : MonoBehaviour
     public void SetGameManager(GameManager gameManager)
     {
         this.gameManager = gameManager;
+    }
+
+    public void SetColor(Color color)
+    {
+        cursorImage.color = color;
     }
 
     private void updateCursorPosition(Vector2 currentPosition)

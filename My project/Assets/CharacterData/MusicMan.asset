@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b70e0e6ac0c5949accc4fb34889ae2, type: 3}
   m_Name: MusicMan
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  maskSprite: {fileID: -2543912000341082192, guid: f83fd2c2f0ca1da48b05c44902071203, type: 3}
+  maskSprite: {fileID: -7114942897977118011, guid: 29b1461f60e6bb14489065770a70a623, type: 3}
   characterName: Music Man
   characterID: 0
