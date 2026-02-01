@@ -133,6 +133,7 @@ public class CharacterParentClass : MonoBehaviour
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+        print(moveInput);
         if (!moveInput.Equals(Vector2.zero))
         {
             a.SetBool("IsMoving", true);
