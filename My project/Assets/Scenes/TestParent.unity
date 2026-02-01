@@ -493,6 +493,10 @@ MonoBehaviour:
   hurtbox: {fileID: 1038957300}
   currentSpecial: 0
   maxSpecial: 100
+  audioSource: {fileID: 0}
+  attackClip: {fileID: 0}
+  swingPunch: {fileID: 0}
+  successPunch: {fileID: 0}
   playerID: 
   controllerID: 
   specialBar: {fileID: 0}
@@ -2049,7 +2053,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a075b52444ce99542bb55d9cef25bb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialBarManager
-  Bar: {fileID: 2762732328234394727}
+  P1_GO: {fileID: 0}
+  P2_GO: {fileID: 0}
+  P3_GO: {fileID: 0}
+  P4_GO: {fileID: 0}
+  P1_MainImage: {fileID: 0}
+  P2_MainImage: {fileID: 0}
+  P3_MainImage: {fileID: 0}
+  P4_MainImage: {fileID: 0}
+  P1_Text: {fileID: 0}
+  P2_Text: {fileID: 0}
+  P3_Text: {fileID: 0}
+  P4_Text: {fileID: 0}
+  P1_Slider: {fileID: 0}
+  P2_Slider: {fileID: 0}
+  P3_Slider: {fileID: 0}
+  P4_Slider: {fileID: 0}
+  musicManMask: {fileID: 0}
+  DrunkMask: {fileID: 0}
+  TricksterMask: {fileID: 0}
+  LawManMask: {fileID: 0}
+  MusicManBar: {fileID: 0}
+  DrunkBar: {fileID: 0}
+  TricksterBar: {fileID: 0}
+  LawManBar: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!224 &3409988091759642181
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2417,7 +2445,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a075b52444ce99542bb55d9cef25bb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialBarManager
-  Bar: {fileID: 5763155209851736665}
+  P1_GO: {fileID: 0}
+  P2_GO: {fileID: 0}
+  P3_GO: {fileID: 0}
+  P4_GO: {fileID: 0}
+  P1_MainImage: {fileID: 0}
+  P2_MainImage: {fileID: 0}
+  P3_MainImage: {fileID: 0}
+  P4_MainImage: {fileID: 0}
+  P1_Text: {fileID: 0}
+  P2_Text: {fileID: 0}
+  P3_Text: {fileID: 0}
+  P4_Text: {fileID: 0}
+  P1_Slider: {fileID: 0}
+  P2_Slider: {fileID: 0}
+  P3_Slider: {fileID: 0}
+  P4_Slider: {fileID: 0}
+  musicManMask: {fileID: 0}
+  DrunkMask: {fileID: 0}
+  TricksterMask: {fileID: 0}
+  LawManMask: {fileID: 0}
+  MusicManBar: {fileID: 0}
+  DrunkBar: {fileID: 0}
+  TricksterBar: {fileID: 0}
+  LawManBar: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!1 &5173288887589463084
 GameObject:
   m_ObjectHideFlags: 0
@@ -3234,7 +3286,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a075b52444ce99542bb55d9cef25bb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialBarManager
-  Bar: {fileID: 7132322852959455948}
+  P1_GO: {fileID: 0}
+  P2_GO: {fileID: 0}
+  P3_GO: {fileID: 0}
+  P4_GO: {fileID: 0}
+  P1_MainImage: {fileID: 0}
+  P2_MainImage: {fileID: 0}
+  P3_MainImage: {fileID: 0}
+  P4_MainImage: {fileID: 0}
+  P1_Text: {fileID: 0}
+  P2_Text: {fileID: 0}
+  P3_Text: {fileID: 0}
+  P4_Text: {fileID: 0}
+  P1_Slider: {fileID: 0}
+  P2_Slider: {fileID: 0}
+  P3_Slider: {fileID: 0}
+  P4_Slider: {fileID: 0}
+  musicManMask: {fileID: 0}
+  DrunkMask: {fileID: 0}
+  TricksterMask: {fileID: 0}
+  LawManMask: {fileID: 0}
+  MusicManBar: {fileID: 0}
+  DrunkBar: {fileID: 0}
+  TricksterBar: {fileID: 0}
+  LawManBar: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!222 &7781805158543592697
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3393,7 +3469,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a075b52444ce99542bb55d9cef25bb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialBarManager
-  Bar: {fileID: 8996326836955631891}
+  P1_GO: {fileID: 0}
+  P2_GO: {fileID: 0}
+  P3_GO: {fileID: 0}
+  P4_GO: {fileID: 0}
+  P1_MainImage: {fileID: 0}
+  P2_MainImage: {fileID: 0}
+  P3_MainImage: {fileID: 0}
+  P4_MainImage: {fileID: 0}
+  P1_Text: {fileID: 0}
+  P2_Text: {fileID: 0}
+  P3_Text: {fileID: 0}
+  P4_Text: {fileID: 0}
+  P1_Slider: {fileID: 0}
+  P2_Slider: {fileID: 0}
+  P3_Slider: {fileID: 0}
+  P4_Slider: {fileID: 0}
+  musicManMask: {fileID: 0}
+  DrunkMask: {fileID: 0}
+  TricksterMask: {fileID: 0}
+  LawManMask: {fileID: 0}
+  MusicManBar: {fileID: 0}
+  DrunkBar: {fileID: 0}
+  TricksterBar: {fileID: 0}
+  LawManBar: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!222 &8492874931272046374
 CanvasRenderer:
   m_ObjectHideFlags: 0
