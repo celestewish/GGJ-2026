@@ -67,8 +67,8 @@ public class DrunkSpecial : CharacterParentClass
         //Apply gradual rotation based on weight factor
         if (lookDir != Vector3.zero)
         {
-            Quaternion rot = Quaternion.FromToRotation(transform.up, lookDir);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot * transform.rotation, 1 / weight * Time.deltaTime * 25);
+            Quaternion rot = Quaternion.FromToRotation(rotateTransform.up, lookDir);
+            rotateTransform.rotation = Quaternion.Slerp(rotateTransform.rotation, rot * rotateTransform.rotation, 1 / weight * Time.deltaTime * 25);
         }
     }
 
