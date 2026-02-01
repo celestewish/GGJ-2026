@@ -25,6 +25,10 @@ public class CharacterParentClass : MonoBehaviour
     [SerializeField] protected float currentSpecial = 1f;
     [SerializeField] protected float maxSpecial = 100f;
 
+    [Header("Audio")]
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected AudioClip attackClip;
+
     public string playerID;
     public string controllerID;
 
@@ -37,7 +41,7 @@ public class CharacterParentClass : MonoBehaviour
     protected bool isAttacking = false;
     protected bool specialReady = false;
 
-    protected  void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         // Set drag to simulate friction
@@ -49,13 +53,17 @@ public class CharacterParentClass : MonoBehaviour
         currentSpecial = 1f;
         maxSpecial = 200f;
 
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
     }
 
     protected virtual void Update()
     {
     
-        GainSpecial(currentSpecial);
-        Death();
+        //GainSpecial(currentSpecial);
+        //Death();
      
     }
 
@@ -202,8 +210,11 @@ public class CharacterParentClass : MonoBehaviour
     {
         Debug.Log("RAHHHHHH");
         //PUT character special code here.
-      
-
+        // Play special sound if assigned
+        if (audioSource != null && attackClip != null)
+        {
+            audioSource.PlayOneShot(attackClip); // non?overlapping SFX [web:152][web:160]
+        }
     }
     // gain meter
     public void GainSpecial(float amount)
