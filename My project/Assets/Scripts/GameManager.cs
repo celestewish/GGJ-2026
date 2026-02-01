@@ -49,6 +49,15 @@ public class GameManager : MonoBehaviour
 
         manager = GetComponent<PlayerInputManager>();
 
+        for (int i = 0; i < pDataArray.Length; i++)
+        {
+            if (pDataArray[i].devices == null)
+            {
+                pDataArray[i] = new PlayerData(-1, "", null);
+                gameEndPositions[i] = new PlayerData(-1, "", null);
+            }
+        }
+
         DontDestroyOnLoad(this);
     }
 
@@ -108,14 +117,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < pDataArray.Length; i++)
+        /*for (int i = 0; i < pDataArray.Length; i++)
         {
             if (pDataArray[i].devices == null)
             {
                 pDataArray[i] = new PlayerData(-1, "", null);
                 gameEndPositions[i] = new PlayerData(-1, "", null);
             }
-        }
+        }*/
 
         /*if(currentState == GameState.Game)
         {
@@ -129,6 +138,7 @@ public class GameManager : MonoBehaviour
     }
     public void playerJoin(PlayerInput p)
     {
+        print("Player");
         if(currentState != GameState.Menu && currentState != GameState.Results)
         {
             return;
