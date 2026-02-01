@@ -388,6 +388,7 @@ MonoBehaviour:
   tricksterSound: {fileID: 8300000, guid: f969b537eecbb3941b46afa43b2a6fba, type: 3}
   punch: {fileID: 8300000, guid: fa4da1efec4d68c4194d28771e2ad1a6, type: 3}
   succPunch: {fileID: 8300000, guid: 0ab96e399d7846e4fb3d257dd0483e48, type: 3}
+  poofPrefab: {fileID: 918424300527936130, guid: 5adc0d4e0eed5774ebc3953b4dcf9159, type: 3}
 --- !u!114 &7320073165477694839
 MonoBehaviour:
   m_ObjectHideFlags: 0

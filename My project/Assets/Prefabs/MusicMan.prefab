@@ -210,6 +210,7 @@ MonoBehaviour:
   punch: {fileID: 8300000, guid: fa4da1efec4d68c4194d28771e2ad1a6, type: 3}
   succPunch: {fileID: 8300000, guid: 0ab96e399d7846e4fb3d257dd0483e48, type: 3}
   shockwavePrefab: {fileID: 7266516839025931329, guid: 0b26ef686d7dc8046bb18f703ec32b1c, type: 3}
+  saxPrefab: {fileID: 3710132786571030100, guid: 01b84f3f041aeed4a878a394708f783a, type: 3}
 --- !u!114 &7564299339300290502
 MonoBehaviour:
   m_ObjectHideFlags: 0
