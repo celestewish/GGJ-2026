@@ -3905,7 +3905,7 @@ PrefabInstance:
       objectReference: {fileID: 8639053482149898863}
     - target: {fileID: 5449429069346046358, guid: 4085c3e4fbb3dd544b791e93165e565d, type: 3}
       propertyPath: gameSceneName
-      value: TestParent
+      value: GameScene
       objectReference: {fileID: 0}
     - target: {fileID: 5449429069346046358, guid: 4085c3e4fbb3dd544b791e93165e565d, type: 3}
       propertyPath: spawnPositions.Array.size
