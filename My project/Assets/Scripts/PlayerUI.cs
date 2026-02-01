@@ -1,6 +1,8 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Slider specialBar;
     [SerializeField] Image knockedOutSprite;
     [SerializeField] Image readySpecial;
+   
+    
 
     public int playerID = -1;
 
@@ -33,10 +37,13 @@ public class PlayerUI : MonoBehaviour
     public void Knockout()
     {
         knockedOutSprite.enabled = true;
+      
 
         //can add more knockout visuals here
     }
-     public void IsReady(float amount, float Max)
+   
+
+    public void IsReady(float amount, float Max)
     {
         if (amount >= Max)
         {
