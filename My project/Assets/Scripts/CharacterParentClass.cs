@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterParentClass : MonoBehaviour
@@ -21,12 +22,12 @@ public class CharacterParentClass : MonoBehaviour
     [SerializeField] protected float lastAttackTime = -999f;
     [SerializeField] protected GameObject hitBox; // Child GameObject with Collider(Trigger)
     [SerializeField] private GameObject hurtbox; // Child GameObject with Collider(Trigger)
-    [SerializeField] protected float currentSpecial = 0f;
+    [SerializeField] protected float currentSpecial = 1f;
     [SerializeField] protected float maxSpecial = 100f;
 
     public string playerID;
-   
 
+    [SerializeField] protected SpecialBarManager specialBar; //this needs a slider ui
 
     protected Rigidbody2D rb;
     protected Vector2 moveInput;
@@ -42,7 +43,10 @@ public class CharacterParentClass : MonoBehaviour
         rb.gravityScale = 0; // Assuming top-down; set to 1 for platformer
         hitBox.gameObject.SetActive(false);
         playerID = gameObject.name;
-    
+
+        currentSpecial = 1f;
+        maxSpecial = 200f;
+
     }
 
     protected virtual void Update()
@@ -173,13 +177,15 @@ public class CharacterParentClass : MonoBehaviour
     protected virtual void PerformSpecial()
     {
         Debug.Log("RAHHHHHH");
-       //PUT character special code here.
+        //PUT character special code here.
+      
 
     }
     // gain meter
     public void GainSpecial(float amount)
     {
-        currentSpecial = Mathf.Clamp(currentSpecial + amount, 0f, maxSpecial);
+        currentSpecial = Mathf.Clamp(currentSpecial + (amount * Time.deltaTime), 0f, maxSpecial);
+        specialBar.SetSpecialBar(currentSpecial);
     }
     protected virtual IEnumerator Special()
     {
@@ -187,15 +193,17 @@ public class CharacterParentClass : MonoBehaviour
         if (currentSpecial >= maxSpecial && !specialReady)
         {
             specialReady = true;
+            hitBox.gameObject.SetActive(true);
             PerformSpecial();
             // Consume the meter
-            currentSpecial = 0f;
+            currentSpecial = 1f;
             yield return new WaitForSeconds(1f);
             specialReady = false;
             hitBox.gameObject.SetActive(false);
         }
     }
 
+   
     public void changeStat(int id, int value, bool addative) //writes to player stats, when called with addative set to true, will add value instead of overwriting
     {
         switch (id) //not the nicest code block but should do the job

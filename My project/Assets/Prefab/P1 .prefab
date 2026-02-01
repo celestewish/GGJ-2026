@@ -118,6 +118,7 @@ MonoBehaviour:
   currentSpecial: 0
   maxSpecial: 100
   playerID: 
+  specialBar: {fileID: 1871802878323772299, guid: d0e9e2845ffdcbf4ca565d4a50aadc7c, type: 3}
 --- !u!50 &7425771642351801979
 Rigidbody2D:
   serializedVersion: 5
@@ -172,7 +173,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: df70fa95-8a34-4494-b137-73ab6b9c7d37
+  m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &6325877236537404632
