@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: b16d9521b2178604fba0151c4c7f33fd
+guid: efa7e31afb12a210bbf8c3ce0ec899c8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1703756777095959328
-    second: MusicMan_Sprite_Idle_0
+      213: -8319200991355942251
+    second: Trickster_Sprite_Attack_0
   - first:
-      213: 5309117205617565375
-    second: MusicMan_Sprite_Idle_1
+      213: 4497173638531257614
+    second: Trickster_Sprite_Attack_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -78,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,12 +103,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MusicMan_Sprite_Idle_0
+      name: Trickster_Sprite_Attack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 31
+        width: 30
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -118,19 +118,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0ece785fc3a0b58e0800000000000000
-      internalID: -1703756777095959328
+      spriteID: 59ac62f76c24c8c80800000000000000
+      internalID: -8319200991355942251
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MusicMan_Sprite_Idle_1
+      name: Trickster_Sprite_Attack_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
-        width: 31
+        width: 30
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fbedfb738f5cda940800000000000000
-      internalID: 5309117205617565375
+      spriteID: e0518e1e89b296e30800000000000000
+      internalID: 4497173638531257614
       vertices: []
       indices: 
       edges: []
@@ -160,8 +160,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MusicMan_Sprite_Idle_0: -1703756777095959328
-      MusicMan_Sprite_Idle_1: 5309117205617565375
+      Trickster_Sprite_Attack_0: -8319200991355942251
+      Trickster_Sprite_Attack_1: 4497173638531257614
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
