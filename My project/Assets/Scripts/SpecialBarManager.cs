@@ -3,16 +3,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerUIManager : MonoBehaviour
+public class SpecialBarManager : MonoBehaviour
 {
     /// <summary>
     /// Need to have an id that sees what the player has selected. which will tel lmy boolean values what they need to be
     /// they i need my method to through an array four times for assign each player.
     /// </summary>
-    /// 
-
-    [SerializeField] PlayerUI[] playerIcons;
-    private int currentPlayerIcon;
 
     //just needs to be toggled when the special reaches max
     public Image P1_GO;
@@ -57,25 +53,10 @@ public class PlayerUIManager : MonoBehaviour
 
     public GameManager manager;
 
-    public PlayerUI GetCurrentPlayerUI()
-    {
-        for (int i = currentPlayerIcon; i < playerIcons.Length; i++)
-        {
-            if(playerIcons[i].playerID == -1)
-            {
-                currentPlayerIcon = i + 1;
-                return playerIcons[i];
-            }
-        }
-        return null;
-    } 
-
     private void Awake()
     {
-        currentPlayerIcon = 0;
-
         //Text
-        /*P1_Text.name = "P1";
+        P1_Text.name = "P1";
         P2_Text.name = "P2";
         P3_Text.name = "P3";
         P4_Text.name = "P4";
@@ -97,7 +78,7 @@ public class PlayerUIManager : MonoBehaviour
         P1_GO.enabled = false;
         P2_GO.enabled = false;
         P3_GO.enabled = false;
-        P4_GO.enabled = false;*/
+        P4_GO.enabled = false;
     }
 
     public void WhatisWhat(int playerID,int CharacterID, float amount, float Max)

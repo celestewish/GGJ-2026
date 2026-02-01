@@ -8,8 +8,6 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterParentClass : MonoBehaviour
 {
-    private PlayerData playerData;
-
     [Header("Movement Settings")]
     [SerializeField] protected float Speed = 1f;
  //   [SerializeField] protected float acceleration = 50f;
@@ -24,10 +22,8 @@ public class CharacterParentClass : MonoBehaviour
     [SerializeField] protected float lastAttackTime = -999f;
     [SerializeField] protected GameObject hitBox; // Child GameObject with Collider(Trigger)
     [SerializeField] private GameObject hurtbox; // Child GameObject with Collider(Trigger)
-    [SerializeField] protected float specialCooldown = 5f;
-    protected float specialRechargeRate;
-    protected float currentSpecial = 1f;
-    protected float maxSpecial = 100f;
+    [SerializeField] protected float currentSpecial = 1f;
+    [SerializeField] protected float maxSpecial = 100f;
 
     [Header("Audio")]
     [SerializeField] protected AudioSource audioSource;
@@ -35,12 +31,10 @@ public class CharacterParentClass : MonoBehaviour
     [SerializeField] protected AudioClip swingPunch;
     [SerializeField] protected AudioClip successPunch;
 
-    public string playerName;
+    public string playerID;
     public string controllerID;
 
-    [SerializeField] protected PlayerUI playerUI; //this needs a slider ui
-
-    protected GameManager gameManager;
+    [SerializeField] protected SpecialBarManager specialBar; //this needs a slider ui
 
     protected Rigidbody2D rb;
     protected Vector2 moveInput;
@@ -48,40 +42,18 @@ public class CharacterParentClass : MonoBehaviour
     protected Vector3 lookDir;
     protected bool isAttacking = false;
     protected bool specialReady = false;
-    protected bool doingSpecial = false;
 
     protected virtual void Awake()
     {
-        gameManager = FindFirstObjectByType<GameManager>();
-
-        PlayerUIManager barManager = FindFirstObjectByType<PlayerUIManager>();
-        if (barManager != null)
-        {
-            playerUI = barManager.GetCurrentPlayerUI();
-            if(playerUI != null)
-            {
-                if (playerData.characterData != null)
-                {
-                    playerUI.InitSpecialBar(playerData.playerIndex, playerData.characterData);
-                    playerUI.gameObject.SetActive(true);
-                }
-            } else
-            {
-                Debug.LogError("Special Bar not set to a reference. Ensure there are enough special bars for each player.");
-            }
-        }
-
         rb = GetComponent<Rigidbody2D>();
         // Set drag to simulate friction
         rb.linearDamping = friction;
         rb.gravityScale = 0; // Assuming top-down; set to 1 for platformer
         hitBox.gameObject.SetActive(false);
-        playerName = gameObject.name;
+        playerID = gameObject.name;
 
         currentSpecial = 1f;
-        maxSpecial = 100f;
-        specialRechargeRate = maxSpecial / specialCooldown;
-        playerUI.SetSpecialBar(currentSpecial / maxSpecial);
+        maxSpecial = 200f;
 
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
@@ -89,15 +61,12 @@ public class CharacterParentClass : MonoBehaviour
 
     }
 
-    public void SetPlayerData(PlayerData playerData)
-    {
-        this.playerData = playerData;
-    }
-
     protected virtual void Update()
     {
+    
         GainSpecial(currentSpecial);
-        //Death();
+        Death();
+     
     }
 
     protected virtual void Death()
@@ -111,14 +80,10 @@ public class CharacterParentClass : MonoBehaviour
             {
                 this.gameObject.SetActive(false);
             }*/
-        /*if (Mathf.Abs(rb.position.y) > 3 || Mathf.Abs(rb.position.x) > 3)
+        if (Mathf.Abs(rb.position.y) > 3 || Mathf.Abs(rb.position.x) > 3)
         {
             this.gameObject.SetActive(false);
-        }*/
-        this.gameObject.SetActive(false);
-        playerUI.Knockout();
-
-        gameManager.KnockoutPlayer(playerData);
+        }
     }
 
 
@@ -136,7 +101,7 @@ public class CharacterParentClass : MonoBehaviour
         lookDir = new Vector3(lookInput.x, lookInput.y, 0);
 
         //Apply different look code depending on controllerID
-        if (playerData.controlScheme == "Keyboard&Mouse")
+        if (controllerID == "Mouse")
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(lookDir);
             lookDir = (new Vector3(mousePos.x, mousePos.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized;
@@ -187,9 +152,7 @@ public class CharacterParentClass : MonoBehaviour
 
     protected virtual void Move()
     {
-        //rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, moveInput * Speed, friction * Time.deltaTime * 10);
-
-        rb.AddForce(moveInput * Speed * Time.deltaTime * 5, ForceMode2D.Impulse);
+        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, moveInput * Speed, friction * Time.deltaTime * 10);
 
         //Apply gradual rotation based on weight factor
         if (lookDir != Vector3.zero)
@@ -275,11 +238,8 @@ public class CharacterParentClass : MonoBehaviour
     // gain meter
     public void GainSpecial(float amount)
     {
-        if (!doingSpecial)
-        {
-            currentSpecial = Mathf.Clamp(currentSpecial + (specialRechargeRate * Time.deltaTime), 0f, maxSpecial);
-            playerUI.SetSpecialBar(currentSpecial / maxSpecial);
-        }
+        currentSpecial = Mathf.Clamp(currentSpecial + (amount * Time.deltaTime), 0f, maxSpecial);
+      
     }
     protected virtual IEnumerator Special()
     {
@@ -291,21 +251,13 @@ public class CharacterParentClass : MonoBehaviour
             PerformSpecial();
             // Consume the meter
             currentSpecial = 1f;
-            playerUI.SetSpecialBar(currentSpecial / maxSpecial);
             yield return new WaitForSeconds(1f);
             specialReady = false;
             hitBox.gameObject.SetActive(false);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Boundary"))
-        {
-            Death();
-        }
-    }
-
+   
     public void changeStat(int id, int value, bool addative) //writes to player stats, when called with addative set to true, will add value instead of overwriting
     {
         switch (id) //not the nicest code block but should do the job
