@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpecial
   rotateTransform: {fileID: 79945817106050023}
   Speed: 1
+  a: {fileID: 0}
   weight: 1
   friction: 5
   hitStrength: 10
@@ -212,6 +213,7 @@ MonoBehaviour:
   succPunch: {fileID: 8300000, guid: 0ab96e399d7846e4fb3d257dd0483e48, type: 3}
   shockwavePrefab: {fileID: 7266516839025931329, guid: 0b26ef686d7dc8046bb18f703ec32b1c, type: 3}
   saxPrefab: {fileID: 3710132786571030100, guid: 01b84f3f041aeed4a878a394708f783a, type: 3}
+  ConfettiPrefab: {fileID: 4204213494221726337, guid: c00c80b2cc2551d4eb41cfede1724510, type: 3}
 --- !u!114 &7564299339300290502
 MonoBehaviour:
   m_ObjectHideFlags: 0

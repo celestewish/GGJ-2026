@@ -19,6 +19,8 @@ public class LawManSpecial : CharacterParentClass
     public AudioClip punch;
     public AudioClip succPunch;
 
+    [SerializeField] GameObject ConfettiPrefab;
+
     protected override void Awake()
     {
         base.Awake();
@@ -104,4 +106,11 @@ public class LawManSpecial : CharacterParentClass
             audioSource.PlayOneShot(clip);
         }
     }
+
+    protected override void Death()
+    {
+        Instantiate(ConfettiPrefab, transform.position, Quaternion.identity);
+        base.Death();
+    }
+
 }
