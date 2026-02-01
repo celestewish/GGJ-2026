@@ -17,26 +17,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    private void OnEnable()
-    {
-        SceneManager.activeSceneChanged += SceneManager_activeSceneChanged;
-    }
-
-    private void SceneManager_activeSceneChanged(Scene arg0, Scene arg1)
-    {
-        print("Started scene");
-        if (currentState == GameState.Game)
-        {
-            populatePlayersInGame();
-            remainingPlayers = pDataArray;
-            playersStillAlive = playersInGame;
-        }
-        else if (currentState == GameState.Results)
-        {
-
-        }
-    }
-
     private void Start()
     {
         if(currentState == GameState.Game)
@@ -93,56 +73,6 @@ public class GameManager : MonoBehaviour
     {
         activePlayerArray[player].changeStat(stat, value, addative);
     }
-
-    public void KnockoutPlayer(PlayerData player)
-    {
-        print("Knockout Player");
-        gameEndPositions[playersStillAlive - 1] = player;
-        remainingPlayers[player.playerIndex] = new PlayerData(-1, "", null);
-        playersStillAlive--;
-
-        if(playersStillAlive == 1)
-        {
-            for(int i = 0; i < remainingPlayers.Length; i++)
-            {
-                if (remainingPlayers[i].playerIndex != -1)
-                {
-                    print(remainingPlayers[i].playerIndex + " - " + remainingPlayers[i].characterData.characterName);
-                    gameEndPositions[playersStillAlive - 1] = remainingPlayers[i];
-                    print(gameEndPositions[playersStillAlive - 1].playerIndex + " - " + gameEndPositions[playersStillAlive - 1].characterData.characterName);
-                    break;
-                }
-            }
-
-            //handle game end
-            currentState = GameState.Results;
-            SceneManager.LoadScene("EndScene");
-        }
-    }
-    public PlayerData[] GetGameEndPlayerPositions()
-    {
-        return gameEndPositions;
-    }
-
-    public bool SetPlayerSelection(int playerIndex, CharacterData data)
-    {
-        if (pDataArray[playerIndex].charID == -1)
-        {
-            pDataArray[playerIndex].charID = data.characterID;
-            pDataArray[playerIndex].characterData = data;
-            playersReady++;
-
-            return true;
-        }
-        return false;
-    }
-    public void UnsetPlayerSelection(int playerIndex)
-    {
-        pDataArray[playerIndex].charID = -1;
-        pDataArray[playerIndex].characterData = null;
-        playersReady--;
-    }
-
 
     public void PauseGame()
     {
