@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject[] playerPrefabArray;
-    private CharacterParentClass[] activePlayerArray = new CharacterParentClass[4]; //the positions in this array correspond to the players. 0 is player 1 and so on
+    private CharacterParentClass[] activePlayerArray = new CharacterParentClass[4];
+    private PlayerData[] pDataArray = new PlayerData[2];
     public string gameSceneName;
 
     private GameState currentState;
@@ -17,6 +19,16 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         currentState = GameState.Menu;
+    }
+
+    public void playerJoin(PlayerInput p)
+    {
+        pDataArray[p.playerIndex] = new PlayerData(p.playerIndex, p.currentControlScheme, p.devices.ToArray());
+
+        SelectionCursor s = p.gameObject.GetComponent<SelectionCursor>();
+        s.setControlScheme(p.currentControlScheme);
+        s.transform.SetParent(FindFirstObjectByType<Canvas>().transform);
+        s.transform.position = Vector3.zero;
     }
 
     public void startTheGame()
@@ -48,6 +60,23 @@ public class GameManager : MonoBehaviour
     }
 
 
+}
+
+public struct PlayerData
+{
+    public PlayerData(int p, string c, InputDevice[] d)
+    {
+        playerIndex = p;
+        controlScheme = c;
+        devices = d;
+        charID = -1;
+    }
+
+    int playerIndex;
+    string controlScheme;
+    InputDevice[] devices;
+
+    int charID;
 }
 
 public enum GameState
