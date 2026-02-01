@@ -18,6 +18,10 @@ public class PlayerSpawn : MonoBehaviour
      void Start()
     {
         manager = GetComponent<PlayerInputManager>();
+        foreach(Transform t in spawnPositions)
+        {
+            t.gameObject.SetActive(true);
+        }
         /*index = 0;
         manager.playerPrefab = players[index];*/
     }
@@ -55,6 +59,7 @@ public class PlayerSpawn : MonoBehaviour
         spawnedCharacter.SetPlayerData(playerDatas[input.playerIndex]);
 
         spawnedCharacter.transform.position = spawnPositions[input.playerIndex].position;
+        spawnPositions[input.playerIndex].gameObject.SetActive(false);
 
         players[input.playerIndex] = spawnedCharacter;
 

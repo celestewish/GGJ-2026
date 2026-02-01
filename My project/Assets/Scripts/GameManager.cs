@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private PlayerData[] pDataArray = new PlayerData[4];
     private int playersReady = 0;
     private int playersInGame = 0;
-    public string gameSceneName;
+    public string gameSceneName = "GameScene";
 
     private int playersStillAlive = 0;
     private PlayerData[] remainingPlayers;
