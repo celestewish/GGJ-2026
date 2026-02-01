@@ -1211,8 +1211,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1358590627}
-  - component: {fileID: 1358590626}
   - component: {fileID: 1358590625}
+  - component: {fileID: 1358590628}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -1238,7 +1238,22 @@ MonoBehaviour:
   - {fileID: 871171183}
   - {fileID: 664338622}
   specialBarManager: {fileID: 0}
---- !u!114 &1358590626
+--- !u!4 &1358590627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358590624}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1358590628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1278,13 +1293,13 @@ MonoBehaviour:
       m_Name: 
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: 9a7b9c73-21f4-4252-a930-38011b7ba3f1
+      m_Id: ed03a300-ace2-427f-b89f-4572a714cffe
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 1719700546}
+  m_PlayerPrefab: {fileID: 0}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -1294,21 +1309,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!4 &1358590627
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358590624}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1421522883
 GameObject:
   m_ObjectHideFlags: 0
@@ -1682,11 +1682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faaf3ff817d32884bbb29cb01538bfb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialBar
---- !u!1 &1719700546 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4773216038579192081, guid: 5797cc49e41e8ac4fa0ec232e9febecd, type: 3}
-  m_PrefabInstance: {fileID: 868146517891859871}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1844705647
 GameObject:
   m_ObjectHideFlags: 0

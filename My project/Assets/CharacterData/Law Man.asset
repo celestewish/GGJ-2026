@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b70e0e6ac0c5949accc4fb34889ae2, type: 3}
   m_Name: Law Man
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  maskSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  maskSprite: {fileID: -550722331164962663, guid: d8816d7bf545ae445948c0b1b76571a4, type: 3}
   characterName: Law Man
   characterID: 3

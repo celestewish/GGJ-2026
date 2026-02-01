@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b70e0e6ac0c5949accc4fb34889ae2, type: 3}
   m_Name: Trickster
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  maskSprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  maskSprite: {fileID: 4636101093237156486, guid: 8f694cdb062f46743b7dea85836c0879, type: 3}
   characterName: Trickster
   characterID: 2
