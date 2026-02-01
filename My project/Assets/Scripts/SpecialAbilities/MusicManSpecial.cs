@@ -18,6 +18,7 @@ public class MusicManSpecial : CharacterParentClass
 
     [Header("VFX")]
     public GameObject saxPrefab;
+    [SerializeField] GameObject ConfettiPrefab;
 
     protected override void Awake()
     {
@@ -59,5 +60,11 @@ public class MusicManSpecial : CharacterParentClass
         {
             Instantiate(shockwavePrefab, transform.position, Quaternion.identity);
         }
+    }
+    protected override void Death()
+    {
+        Instantiate(ConfettiPrefab, transform.position, Quaternion.identity);
+        base.Death();
+      
     }
 }

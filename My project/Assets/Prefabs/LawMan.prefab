@@ -480,6 +480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BatonCharacter
   rotateTransform: {fileID: 6895479552429811783}
   Speed: 8
+  a: {fileID: 0}
   weight: 1
   friction: 5
   hitStrength: 10
@@ -505,6 +506,7 @@ MonoBehaviour:
   lawManHitSound: {fileID: 8300000, guid: 1437428207b836a4f99becf6884f5f10, type: 3}
   punch: {fileID: 8300000, guid: fa4da1efec4d68c4194d28771e2ad1a6, type: 3}
   succPunch: {fileID: 8300000, guid: 0ab96e399d7846e4fb3d257dd0483e48, type: 3}
+  ConfettiPrefab: {fileID: 4204213494221726337, guid: c00c80b2cc2551d4eb41cfede1724510, type: 3}
 --- !u!114 &2134997228139059894
 MonoBehaviour:
   m_ObjectHideFlags: 0
