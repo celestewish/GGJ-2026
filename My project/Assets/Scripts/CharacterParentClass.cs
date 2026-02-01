@@ -28,6 +28,8 @@ public class CharacterParentClass : MonoBehaviour
     [Header("Audio")]
     [SerializeField] protected AudioSource audioSource;
     [SerializeField] protected AudioClip attackClip;
+    [SerializeField] protected AudioClip swingPunch;
+    [SerializeField] protected AudioClip successPunch;
 
     public string playerID;
     public string controllerID;
@@ -62,8 +64,8 @@ public class CharacterParentClass : MonoBehaviour
     protected virtual void Update()
     {
     
-        //GainSpecial(currentSpecial);
-        //Death();
+        GainSpecial(currentSpecial);
+        Death();
      
     }
 
@@ -186,8 +188,26 @@ public class CharacterParentClass : MonoBehaviour
         Debug.Log(gameObject.name + " attacked with strength: " + hitStrength);
         // 1. Activate Hitbox Object via animation event or script
         hitBox.gameObject.SetActive(true);
-       
-      
+        if (audioSource != null && swingPunch != null)
+        {
+            audioSource.PlayOneShot(swingPunch);
+        }
+    }
+    protected void OnPunchHit()
+    {
+        if (audioSource != null && successPunch != null)
+        {
+            StartCoroutine(PlayHitDelayed(successPunch, 0.2f));
+        }
+    }
+    private IEnumerator PlayHitDelayed(AudioClip clip, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (audioSource != null)
+        {
+            Debug.Log("Clip played");
+            audioSource.PlayOneShot(clip);
+        }
     }
     public float GetStrength()
     {
@@ -210,7 +230,6 @@ public class CharacterParentClass : MonoBehaviour
     {
         Debug.Log("RAHHHHHH");
         //PUT character special code here.
-        // Play special sound if assigned
         if (audioSource != null && attackClip != null)
         {
             audioSource.PlayOneShot(attackClip); // non?overlapping SFX [web:152][web:160]

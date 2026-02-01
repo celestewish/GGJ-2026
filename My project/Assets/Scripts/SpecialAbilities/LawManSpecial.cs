@@ -15,8 +15,15 @@ public class LawManSpecial : CharacterParentClass
     [Header("Audio")]
     public AudioClip lawManSound;
     public AudioClip lawManHitSound;
+    public AudioClip punch;
+    public AudioClip succPunch;
 
-    private int hitCount = 0;
+    protected override void Awake()
+    {
+        base.Awake();
+        swingPunch = punch;
+        successPunch = succPunch;
+    }
 
     // Instead of normal attack, LawMan swings his baton
     protected override void PerformAttack()
@@ -25,7 +32,6 @@ public class LawManSpecial : CharacterParentClass
         if (Time.time < lastBatonTime + batonCooldown) return;
 
         lastBatonTime = Time.time;
-        hitCount = 0;
         StartCoroutine(BatonSwingCoroutine());
     }
 
@@ -77,8 +83,6 @@ public class LawManSpecial : CharacterParentClass
     public void OnBatonHit()
     {
         Debug.Log("Baton hit");
-        if (hitCount > 0) return;
-        hitCount++;
 
         if (audioSource != null && lawManHitSound != null)
         {

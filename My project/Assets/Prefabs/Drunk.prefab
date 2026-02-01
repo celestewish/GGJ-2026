@@ -194,12 +194,16 @@ MonoBehaviour:
   maxSpecial: 100
   audioSource: {fileID: 2597489020892129998}
   attackClip: {fileID: 0}
+  swingPunch: {fileID: 0}
+  successPunch: {fileID: 0}
   playerID: 
   controllerID: 
   specialBar: {fileID: 0}
   inversionChancePerSecond: 0.1
   inversionDuration: 5
   drunkSpecial: {fileID: 8300000, guid: 666c1eeb0c3c83b4ab38814ac2c3a5a4, type: 3}
+  punch: {fileID: 8300000, guid: b4c8722be77f2514a8b96a748e82c00f, type: 3}
+  succPunch: {fileID: 8300000, guid: ba116d6980357a5419184bffd0a47dcf, type: 3}
 --- !u!114 &4254671551080394035
 MonoBehaviour:
   m_ObjectHideFlags: 0

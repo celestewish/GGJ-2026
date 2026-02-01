@@ -9,6 +9,8 @@ public class DrunkSpecial : CharacterParentClass
 
     [Header("Audio")]
     public AudioClip drunkSpecial;
+    public AudioClip punch;
+    public AudioClip succPunch;
 
     private bool controlsInverted = false;
 
@@ -16,6 +18,8 @@ public class DrunkSpecial : CharacterParentClass
     {
         base.Awake();
         attackClip = drunkSpecial;
+        swingPunch = punch;
+        successPunch = succPunch;
     }
 
     //RAAAAAAAAAAAAAAAAAAAAAAAAAAAA

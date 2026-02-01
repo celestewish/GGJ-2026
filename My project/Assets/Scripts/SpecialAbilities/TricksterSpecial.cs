@@ -12,11 +12,15 @@ public class TricksterSpecial : CharacterParentClass
 
     [Header("Audio")]
     public AudioClip tricksterSound;
+    public AudioClip punch;
+    public AudioClip succPunch;
 
     protected override void Awake()
     {
         base.Awake();
         attackClip = tricksterSound;
+        swingPunch = punch;
+        successPunch = succPunch;
     }
 
     protected override void PerformSpecial()
