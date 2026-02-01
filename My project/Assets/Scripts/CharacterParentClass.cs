@@ -97,6 +97,7 @@ public class CharacterParentClass : MonoBehaviour
     protected virtual void Update()
     {
         GainSpecial(currentSpecial);
+        playerUI.IsReady(currentSpecial, maxSpecial);
         //Death();
     }
 
@@ -299,9 +300,11 @@ public class CharacterParentClass : MonoBehaviour
             // Consume the meter
             currentSpecial = 1f;
             playerUI.SetSpecialBar(currentSpecial / maxSpecial);
+            playerUI.IsReady(currentSpecial, maxSpecial);
             yield return new WaitForSeconds(1f);
             specialReady = false;
             hitBox.gameObject.SetActive(false);
+            playerUI.IsReady(currentSpecial, maxSpecial);
         }
     }
 
