@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b70e0e6ac0c5949accc4fb34889ae2, type: 3}
   m_Name: Drunk
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  maskSprite: {fileID: 3664352994810816595, guid: d6d39ca632a70d646a7e1e622c88c8a6, type: 3}
+  maskSprite: {fileID: -7271818968930102011, guid: 1f29ecc049e4f9a40872490bc2d3098b, type: 3}
   characterName: Drunk
   characterID: 1

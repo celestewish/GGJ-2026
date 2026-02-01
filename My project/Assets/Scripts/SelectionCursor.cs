@@ -99,13 +99,16 @@ public class SelectionCursor : MonoBehaviour
 
                 if (this.maskSelection == null)
                 {
+                    print("No Mask Selection");
                     MaskSelection maskSelection = raycastResult.gameObject.transform.parent.GetComponent<MaskSelection>();
                     if (maskSelection)
                     {
+                        print("Found Mask Selection");
                         CharacterData characterData = maskSelection.GetCharacterData();
 
                         if (gameManager.SetPlayerSelection(pi.playerIndex, characterData))
                         {
+                            print("Mask Set Successfully");
                             this.maskSelection = maskSelection;
                             maskSelection.MaskSelected(pi.playerIndex);
 

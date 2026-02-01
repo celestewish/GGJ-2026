@@ -1,13 +1,16 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndPositionManager : MonoBehaviour
 {
     [SerializeField] EndPosition[] endPositions;
 
+    GameManager gameManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameManager gameManager = FindFirstObjectByType<GameManager>();
+        gameManager = FindFirstObjectByType<GameManager>();
 
         if(gameManager != null )
         {
@@ -23,5 +26,10 @@ public class EndPositionManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        gameManager.LoadMainMenu();
     }
 }

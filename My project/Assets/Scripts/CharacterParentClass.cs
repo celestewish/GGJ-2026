@@ -118,11 +118,14 @@ public class CharacterParentClass : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }*/
-        this.gameObject.SetActive(false);
-        playerUI.Knockout();
-        CrowdUI.CrowdCheer();
+        if (this.gameObject.activeSelf)
+        {
+            this.gameObject.SetActive(false);
+            playerUI.Knockout();
+            CrowdUI.CrowdCheer();
 
-        gameManager.KnockoutPlayer(playerData);
+            gameManager.KnockoutPlayer(playerData);
+        }
     }
 
 
