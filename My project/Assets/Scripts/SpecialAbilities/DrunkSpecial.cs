@@ -16,6 +16,7 @@ public class DrunkSpecial : CharacterParentClass
 
     [Header("VFX")]
     public GameObject bubblePrefab;
+    [SerializeField] GameObject ConfettiPrefab;
 
     private bool controlsInverted = false;
 
@@ -50,6 +51,7 @@ public class DrunkSpecial : CharacterParentClass
             }
         }*/
     }
+
 
     // Overrides move to invert controls
     protected override void Move()
@@ -123,5 +125,13 @@ public class DrunkSpecial : CharacterParentClass
         yield return new WaitForSeconds(inversionDuration);
         controlsInverted = false;
     }
+
+    protected override void Death()
+    {
+        Instantiate(ConfettiPrefab, transform.position, Quaternion.identity);
+        base.Death();
+        
+    }
+
 
 }

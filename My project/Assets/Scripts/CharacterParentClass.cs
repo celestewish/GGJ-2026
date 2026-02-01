@@ -53,6 +53,8 @@ public class CharacterParentClass : MonoBehaviour
     protected bool specialReady = false;
     protected bool doingSpecial = false;
 
+  
+
     protected virtual void Awake()
     {
         gameManager = FindFirstObjectByType<GameManager>();
@@ -125,6 +127,7 @@ public class CharacterParentClass : MonoBehaviour
         CrowdUI.CrowdCheer();
 
         gameManager.KnockoutPlayer(playerData);
+
     }
 
 
