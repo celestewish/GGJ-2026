@@ -12,6 +12,7 @@ public class CharacterParentClass : MonoBehaviour
 
     [Header("Movement Settings")]
     [SerializeField] protected float Speed = 1f;
+    [SerializeField] protected Animator a;
  //   [SerializeField] protected float acceleration = 50f;
 
     [Header("Physics Settings")]
@@ -74,6 +75,7 @@ public class CharacterParentClass : MonoBehaviour
         }
 
         rb = GetComponent<Rigidbody2D>();
+        a = GetComponent<Animator>();
         // Set drag to simulate friction
         rb.linearDamping = friction;
         rb.gravityScale = 0; // Assuming top-down; set to 1 for platformer
@@ -131,6 +133,23 @@ public class CharacterParentClass : MonoBehaviour
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+        if (!moveInput.Equals(Vector2.zero))
+        {
+            a.SetBool("IsMoving", true);
+        }
+        else
+        {
+            a.SetBool("IsMoving", false);
+        }
+
+        if(moveInput.x < 0)
+        {
+            a.SetBool("IsLeft", true);
+        }
+        else if(moveInput.x > 0)
+        {
+            a.SetBool("IsLeft", false);
+        }
     }
 
     public void OnLook(InputValue value)
@@ -218,9 +237,10 @@ public class CharacterParentClass : MonoBehaviour
         isAttacking = true;
         PerformAttack();
         lastAttackTime = Time.time;
-
+        a.SetBool("IsAttacking", true);
         yield return new WaitForSeconds(0.2f); // Attack animation time
         isAttacking = false;
+        a.SetBool("IsAttacking", false);
         hitBox.gameObject.SetActive(false);
     }
     //Attack
