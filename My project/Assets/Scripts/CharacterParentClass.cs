@@ -42,6 +42,8 @@ public class CharacterParentClass : MonoBehaviour
 
     protected GameManager gameManager;
 
+    [SerializeField] protected CrowdManager CrowdUI;
+
     protected Rigidbody2D rb;
     protected Vector2 moveInput;
     protected Vector2 lookInput;
@@ -118,6 +120,7 @@ public class CharacterParentClass : MonoBehaviour
         }*/
         this.gameObject.SetActive(false);
         playerUI.Knockout();
+        CrowdUI.CrowdCheer();
 
         gameManager.KnockoutPlayer(playerData);
     }
