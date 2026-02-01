@@ -14,6 +14,9 @@ public class DrunkSpecial : CharacterParentClass
     public AudioClip punch;
     public AudioClip succPunch;
 
+    [Header("VFX")]
+    public GameObject bubblePrefab;
+
     private bool controlsInverted = false;
 
     private float defaultHitStrength;
@@ -83,6 +86,11 @@ public class DrunkSpecial : CharacterParentClass
         if (audioSource != null && attackClip != null)
         {
             audioSource.PlayOneShot(attackClip); // non‑overlapping SFX [web:152][web:160]
+        }
+
+        if (bubblePrefab != null)
+        {
+            Instantiate(bubblePrefab, transform.position, Quaternion.identity);
         }
 
         float time = 0;

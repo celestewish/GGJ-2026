@@ -16,6 +16,9 @@ public class MusicManSpecial : CharacterParentClass
     [Header("Shockwave Prefab")]
     public GameObject shockwavePrefab;
 
+    [Header("VFX")]
+    public GameObject saxPrefab;
+
     protected override void Awake()
     {
         base.Awake();
@@ -32,6 +35,11 @@ public class MusicManSpecial : CharacterParentClass
         if (audioSource != null && specialSfx != null)
         {
             audioSource.PlayOneShot(specialSfx, sfxVolume);
+        }
+
+        if (saxPrefab != null)
+        {
+            Instantiate(saxPrefab, transform.position, Quaternion.identity);
         }
 
         // Find all enemies in radius

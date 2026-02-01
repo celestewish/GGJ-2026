@@ -230,6 +230,7 @@ MonoBehaviour:
   drunkSpecial: {fileID: 8300000, guid: 666c1eeb0c3c83b4ab38814ac2c3a5a4, type: 3}
   punch: {fileID: 8300000, guid: b4c8722be77f2514a8b96a748e82c00f, type: 3}
   succPunch: {fileID: 8300000, guid: ba116d6980357a5419184bffd0a47dcf, type: 3}
+  bubblePrefab: {fileID: 1334058926727488046, guid: 75925ef97462143459b9e78237893af2, type: 3}
 --- !u!114 &4254671551080394035
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,9 @@ public class TricksterSpecial : CharacterParentClass
     public AudioClip punch;
     public AudioClip succPunch;
 
+    [Header("Poof Effect")]
+    public GameObject poofPrefab;
+
     protected override void Awake()
     {
         base.Awake();
@@ -37,6 +40,10 @@ public class TricksterSpecial : CharacterParentClass
         Vector3 spawnPos = transform.position + (Vector3)spawnOffset;
         Quaternion spawnRot = Quaternion.identity;
 
+        if (poofPrefab != null)
+        {
+            Instantiate(poofPrefab, transform.position + Vector3.up * 0.2f, Quaternion.identity);
+        }
         Instantiate(prefabToSpawn, spawnPos, spawnRot);
     }
 

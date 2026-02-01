@@ -231,6 +231,13 @@ public class CharacterParentClass : MonoBehaviour
             audioSource.PlayOneShot(swingPunch);
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            OnPunchHit();
+        }
+    }
     protected void OnPunchHit()
     {
         if (audioSource != null && successPunch != null)
