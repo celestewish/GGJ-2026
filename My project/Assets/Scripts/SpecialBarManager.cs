@@ -51,6 +51,8 @@ public class SpecialBarManager : MonoBehaviour
     bool isTrickster;
     bool isLawMan;
 
+    public GameManager manager;
+
     private void Awake()
     {
         //Text
@@ -79,8 +81,42 @@ public class SpecialBarManager : MonoBehaviour
         P4_GO.enabled = false;
     }
 
-    public void WhatisWhat(int playerID, float amount, float Max)
+    public void WhatisWhat(int playerID,int CharacterID, float amount, float Max)
     {
+        switch(CharacterID)
+        {
+            case 0://dont know which id is which will come back
+                isMusicMan=true; 
+                isLawMan=true;
+                isDrunk=true;
+                isTrickster=true;
+                break; 
+            case 1://dont know which id is which will come back
+                isMusicMan = true;
+                isLawMan = true;
+                isDrunk = true;
+                isTrickster = true;
+                break;
+            case 2://dont know which id is which will come back
+                isMusicMan = true;
+                isLawMan = true;
+                isDrunk = true;
+                isTrickster = true;
+                break;
+            case 3://dont know which id is which will come back
+                isMusicMan = true;
+                isLawMan = true;
+                isDrunk = true;
+                isTrickster = true;
+                break;
+            default://dont know which id is which will come back
+                isMusicMan = false;
+                isLawMan = false;
+                isDrunk = false;
+                isTrickster = false;
+                break;
+          
+        }
         switch (playerID)
         {
             case 0:
