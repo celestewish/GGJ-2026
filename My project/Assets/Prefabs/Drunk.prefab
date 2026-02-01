@@ -114,7 +114,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -192,15 +192,16 @@ MonoBehaviour:
   lastAttackTime: -999
   hitBox: {fileID: 3623778122150703633}
   hurtbox: {fileID: 3312517335914237673}
-  currentSpecial: 0
-  maxSpecial: 100
+  specialCooldown: 5
   audioSource: {fileID: 2597489020892129998}
   attackClip: {fileID: 0}
   swingPunch: {fileID: 0}
   successPunch: {fileID: 0}
   playerName: 
   controllerID: 
-  specialBar: {fileID: 0}
+  playerUI: {fileID: 0}
+  specialDuration: 10
+  drunkHitStrength: 20
   inversionChancePerSecond: 0.1
   inversionDuration: 5
   drunkSpecial: {fileID: 8300000, guid: 666c1eeb0c3c83b4ab38814ac2c3a5a4, type: 3}
@@ -357,7 +358,7 @@ GameObject:
   - component: {fileID: 5096258012506627857}
   m_Layer: 3
   m_Name: HurtBox
-  m_TagString: Untagged
+  m_TagString: HurtBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -433,13 +434,14 @@ GameObject:
   m_Component:
   - component: {fileID: 6194083597759379537}
   - component: {fileID: 780504127318236271}
+  - component: {fileID: 2394680082095423935}
   m_Layer: 3
   m_Name: HitBox
-  m_TagString: Untagged
+  m_TagString: HitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6194083597759379537
 Transform:
   m_ObjectHideFlags: 0
@@ -485,7 +487,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -501,6 +503,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2394680082095423935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3623778122150703633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e36632d2cfde6c4dac2c0e936bc8dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damage
+  currentPlayer: {fileID: 3115282445533526185}
 --- !u!1 &5659107802340714884
 GameObject:
   m_ObjectHideFlags: 0
