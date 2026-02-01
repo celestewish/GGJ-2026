@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject[] playerPrefabArray;
+    public Vector2[] spawnPositions; //Define in inspector
     private CharacterParentClass[] activePlayerArray = new CharacterParentClass[4];
-    private PlayerData[] pDataArray = new PlayerData[2];
+    private PlayerData[] pDataArray = new PlayerData[4];
     public string gameSceneName;
 
-    private GameState currentState;
+    private GameState currentState = GameState.Menu;
 
     private void Awake()
     {
@@ -18,7 +19,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        currentState = GameState.Menu;
+        if(currentState == GameState.Game)
+        {
+            populatePlayersInGame();
+        }
     }
 
     public void playerJoin(PlayerInput p)
@@ -36,6 +40,17 @@ public class GameManager : MonoBehaviour
         currentState = GameState.Game;
         //add position spawning code here
         SceneManager.LoadScene(gameSceneName);
+
+    }
+
+    public void populatePlayersInGame()
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            GameObject newPlayer = Instantiate(playerPrefabArray[pDataArray[i].charID]);
+            activePlayerArray[pDataArray[i].playerIndex] = newPlayer.GetComponent<CharacterParentClass>();
+            newPlayer.transform.position = spawnPositions[i];
+        }
     }
 
     public void setPlayer(int mask, int playerWhoChose)
@@ -87,12 +102,13 @@ public struct PlayerData
         charID = -1;
     }
 
-    int playerIndex;
-    string controlScheme;
-    InputDevice[] devices;
+    public int playerIndex;
+    public string controlScheme;
+    public InputDevice[] devices;
 
-    int charID;
+    public int charID;
 }
+
 
 public enum GameState
 {
