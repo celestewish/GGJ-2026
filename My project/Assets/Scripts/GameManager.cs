@@ -74,6 +74,11 @@ public class GameManager : MonoBehaviour
         if (MusicManager.Instance != null)
             MusicManager.Instance.SetPaused(false);
     }
+    
+    public void pointerEnteredMask()
+    {
+        print("Entered mask");
+    }
 
 }
 
