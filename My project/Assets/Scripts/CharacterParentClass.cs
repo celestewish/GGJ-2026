@@ -239,7 +239,7 @@ public class CharacterParentClass : MonoBehaviour
     public void GainSpecial(float amount)
     {
         currentSpecial = Mathf.Clamp(currentSpecial + (amount * Time.deltaTime), 0f, maxSpecial);
-        specialBar.SetSpecialBar(currentSpecial);
+      
     }
     protected virtual IEnumerator Special()
     {
