@@ -26,12 +26,14 @@ public class CharacterParentClass : MonoBehaviour
     [SerializeField] protected float maxSpecial = 100f;
 
     public string playerID;
+    public string controllerID;
 
     [SerializeField] protected SpecialBarManager specialBar; //this needs a slider ui
 
     protected Rigidbody2D rb;
     protected Vector2 moveInput;
     protected Vector2 lookInput;
+    protected Vector3 lookDir;
     protected bool isAttacking = false;
     protected bool specialReady = false;
 
@@ -85,11 +87,26 @@ public class CharacterParentClass : MonoBehaviour
     public void OnLook(InputValue value)
     {
         lookInput = value.Get<Vector2>();
-        if (lookInput != Vector2.zero)
+
+        lookDir = new Vector3(lookInput.x, lookInput.y, 0);
+
+        //Apply different look code depending on controllerID
+        if (controllerID == "Mouse")
         {
-            float angle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(lookDir);
+            lookDir = (new Vector3(mousePos.x, mousePos.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized;
         }
+        else
+        {
+            lookDir.Normalize();
+        }
+
+        /*if (lookInput != Vector2.zero)
+        {
+            Quaternion rot = Quaternion.FromToRotation(transform.up, lookDir);
+            //float angle = Mathf.Atan2(lookInput.y, lookInput.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot * transform.rotation, 1 / (weight + 1) * Time.deltaTime * 25);
+        }*/
     }
 
     public void OnAttack(InputValue value)
@@ -125,7 +142,14 @@ public class CharacterParentClass : MonoBehaviour
 
     protected virtual void Move()
     {
-        rb.linearVelocity = moveInput * Speed;
+        rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, moveInput * Speed, friction * Time.deltaTime * 10);
+
+        //Apply gradual rotation based on weight factor
+        if (lookDir != Vector3.zero)
+        {
+            Quaternion rot = Quaternion.FromToRotation(transform.up, lookDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot * transform.rotation, 1 / weight * Time.deltaTime * 25);
+        }
     }
   
     //Friction

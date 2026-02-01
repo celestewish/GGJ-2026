@@ -19,7 +19,13 @@ public class PlayerSpawn : MonoBehaviour
     public void SwitchtoNextSpawnCharacter(PlayerInput input)
     {
         index++;
-        manager.playerPrefab = players[index];
+
+        //Stash the device that was used to spawn this character
+        InputDevice device = input.GetDevice<InputDevice>();
+        CharacterParentClass spawnedCharacter = input.gameObject.GetComponent<CharacterParentClass>();
+        spawnedCharacter.controllerID = device.displayName == "Keyboard" || device.displayName == "Mouse" ? "Mouse" : "Controller";
+
+        manager.playerPrefab = players[Mathf.Min(players.Count - 1, index)];
     }
 
 
