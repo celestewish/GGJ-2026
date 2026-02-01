@@ -22,6 +22,7 @@ public class PlayerSpawn : MonoBehaviour
 
         //Stash the device that was used to spawn this character
         InputDevice device = input.GetDevice<InputDevice>();
+        InputDevice[] devices = input.devices.ToArray();
         CharacterParentClass spawnedCharacter = input.gameObject.GetComponent<CharacterParentClass>();
         spawnedCharacter.controllerID = device.displayName == "Keyboard" || device.displayName == "Mouse" ? "Mouse" : "Controller";
 

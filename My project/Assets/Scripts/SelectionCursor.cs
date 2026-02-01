@@ -1,7 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.UI;
 
 public class SelectionCursor : MonoBehaviour
 {
@@ -12,6 +16,10 @@ public class SelectionCursor : MonoBehaviour
     private Mouse vMouse;
     private RectTransform rt;
     private RectTransform canvasRT;
+    private GraphicRaycaster raycaster;
+
+    Dictionary<int, GameObject> hoveringObjects = new Dictionary<int, GameObject>();
+
     public void OnNavigate(InputValue iv)
     {
         nav = iv.Get<Vector2>();
@@ -23,19 +31,74 @@ public class SelectionCursor : MonoBehaviour
             InputState.Change(vMouse.position, newPos);
             InputState.Change(vMouse.delta, nav);
 
-            
+   
             currentPos = newPos;
-            print(currentPos);
+            //print(currentPos);
         }
 
         updateCursorPosition(currentPos);
+
+        var pointer = new PointerEventData(EventSystem.current) { position = transform.position };
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        raycaster.Raycast(pointer, raycastResults);
+        Dictionary<int, GameObject> newHoveringIDs = new Dictionary<int, GameObject>();
+        foreach (RaycastResult raycastResult in raycastResults)
+        {
+            var ui = raycastResult.gameObject.GetComponent<UIBehaviour>();
+            if (ui)
+            {
+                int id = raycastResult.gameObject.GetHashCode();
+                newHoveringIDs.Add(id, raycastResult.gameObject);
+                if(!hoveringObjects.ContainsKey(id))
+                {
+                    hoveringObjects.Add(id, raycastResult.gameObject);
+                }
+                Debug.Log($"Entered on {raycastResult.gameObject}");
+                ExecuteEvents.Execute(raycastResult.gameObject, pointer, ExecuteEvents.pointerEnterHandler);
+            }
+        }
+
+        int[] oldIDs = hoveringObjects.Keys.ToArray();
+        for (int i = 0; i < oldIDs.Length; i++)
+        {
+            if (!newHoveringIDs.ContainsKey(oldIDs[i]))
+            {
+                GameObject obj = hoveringObjects[oldIDs[i]];
+                var ui = obj.GetComponent<UIBehaviour>();
+                if (ui)
+                {
+                    Debug.Log($"Exited on {obj}");
+                    ExecuteEvents.Execute(obj, pointer, ExecuteEvents.pointerExitHandler);
+                }
+            }
+            hoveringObjects.Remove(oldIDs[i]);
+        }
     }
+
+    public void OnClick(InputValue iv)
+    {
+        var pointer = new PointerEventData(EventSystem.current) { position = transform.position };
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        raycaster.Raycast(pointer, raycastResults);
+        foreach (RaycastResult raycastResult in raycastResults)
+        {
+            var ui = raycastResult.gameObject.GetComponent<UIBehaviour>();
+            if (ui)
+            {
+                Debug.Log($"Clicked on {raycastResult.gameObject}");
+                ExecuteEvents.Execute(raycastResult.gameObject, pointer, ExecuteEvents.pointerClickHandler);
+            }
+        }
+    }
+
 
     private void OnEnable()
     {
         pi = GetComponent<PlayerInput>();
         rt = GetComponent<RectTransform>();
-        canvasRT = FindFirstObjectByType<Canvas>().GetComponent<RectTransform>();
+        Canvas canvas = FindFirstObjectByType<Canvas>();
+        canvasRT = canvas.GetComponent<RectTransform>();
+        raycaster = canvas.GetComponent<GraphicRaycaster>();
 
         if (pi.currentControlScheme.Equals("Gamepad"))
         {
@@ -79,4 +142,5 @@ public class SelectionCursor : MonoBehaviour
                 break;
         }
     }
+
 }
