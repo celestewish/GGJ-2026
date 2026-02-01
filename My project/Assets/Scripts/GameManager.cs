@@ -46,6 +46,10 @@ public class GameManager : MonoBehaviour
             remainingPlayers = pDataArray;
             playersStillAlive = playersInGame;
         }
+        else if (currentState == GameState.Results)
+        {
+
+        }
     }
 
     private void Start()
@@ -132,6 +136,7 @@ public class GameManager : MonoBehaviour
 
     public void KnockoutPlayer(PlayerData player)
     {
+        print("Knockout Player");
         gameEndPositions[playersStillAlive - 1] = player;
         remainingPlayers[player.playerIndex] = new PlayerData(-1, "", null);
         playersStillAlive--;
@@ -150,6 +155,7 @@ public class GameManager : MonoBehaviour
             }
 
             //handle game end
+            currentState = GameState.Results;
             SceneManager.LoadScene("EndScene");
         }
     }
