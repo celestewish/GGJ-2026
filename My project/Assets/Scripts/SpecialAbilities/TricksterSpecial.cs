@@ -17,6 +17,7 @@ public class TricksterSpecial : CharacterParentClass
 
     [Header("Poof Effect")]
     public GameObject poofPrefab;
+    [SerializeField] GameObject ConfettiPrefab;
 
     protected override void Awake()
     {
@@ -59,5 +60,12 @@ public class TricksterSpecial : CharacterParentClass
             case 2: return goldClonePrefab;
         }
         return null;
+    }
+
+    protected override void Death()
+    {
+        Instantiate(ConfettiPrefab, transform.position, Quaternion.identity);
+        base.Death();
+       
     }
 }
