@@ -47,6 +47,21 @@ public class GameManager : MonoBehaviour
         activePlayerArray[player].changeStat(stat, value, addative);
     }
 
+    public void PauseGame()
+    {
+        currentState = GameState.Pause;
+        Time.timeScale = 0f;
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.SetPaused(true);
+    }
+
+    public void ResumeGame()
+    {
+        currentState = GameState.Game;
+        Time.timeScale = 1f;
+        if (MusicManager.Instance != null)
+            MusicManager.Instance.SetPaused(false);
+    }
 
 }
 
