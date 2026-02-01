@@ -14,7 +14,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Start()
     {
-        GameObject g = GameObject.Find("GameManager");
+        g = FindFirstObjectByType<GameManager>();
 
         if (g == null)
         {
@@ -67,6 +67,18 @@ public class MainMenuManager : MonoBehaviour
             if (b == false) return false;
         }
         return true;
+    }
+
+    public void CheckGameReady()
+    {
+        if(g.IsGameReady())
+        {
+            allSelectedPanel.SetActive(true);
+        }
+        else
+        {
+            allSelectedPanel.SetActive(false);
+        }
     }
 
     public void startTheGame()
