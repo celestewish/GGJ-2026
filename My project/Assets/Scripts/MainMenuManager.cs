@@ -30,6 +30,16 @@ public class MainMenuManager : MonoBehaviour
         activePanel.SetActive(false);
         activePanel = panelList[p];
         activePanel.SetActive(true);
+        if (panelList[2].activeInHierarchy)
+        {
+            MusicManager.Instance.isSelect = true;
+            MusicManager.Instance.PlaySelectMusic();
+        }
+        else
+        {
+            MusicManager.Instance.isSelect = false;
+            MusicManager.Instance.PlaySelectMusic();
+        }
         m = (MenuState)p;
     }
 

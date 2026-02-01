@@ -15,6 +15,9 @@ public class MusicManager : MonoBehaviour
     public float crossfadeTime = 1f;
     public float pausedVolumeMultiplier = 0.3f; // volume when paused
 
+    [Header("Select Trigger")]
+    public bool isSelect = false;
+
     private AudioSource sourceA;
     private AudioSource sourceB;
     private AudioSource activeSource;
@@ -49,11 +52,11 @@ public class MusicManager : MonoBehaviour
     private void OnSceneChanged(Scene oldScene, Scene newScene)
     {
         // Choose playlist based on scene name
-        if (newScene.name.Contains("Menu"))
+        if (newScene.name.Contains("MainMenu") && !isSelect)
         {
             PlayRandomFrom(menuTracks);
         }
-        else if (newScene.name.Contains("Select") || newScene.name.Contains("PlayerSelect"))
+        else if (newScene.name.Contains("MainMenu") && isSelect)
         {
             PlayRandomFrom(selectTracks);
         }
@@ -61,6 +64,18 @@ public class MusicManager : MonoBehaviour
         {
             // Assume gameplay scenes
             PlayRandomFrom(gameTracks);
+        }
+    }
+
+    public void PlaySelectMusic()
+    {
+        if (isSelect)
+        {
+            PlayRandomFrom(selectTracks);
+        }
+        else
+        {
+            PlayRandomFrom(menuTracks);
         }
     }
 
