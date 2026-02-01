@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class SelectionCursor : MonoBehaviour
 {
+    [SerializeField] Image cursorImage;
     Vector2 nav;
     PlayerInput pi;
     public int sensitivity = 10;
@@ -171,6 +172,11 @@ public class SelectionCursor : MonoBehaviour
     public void SetGameManager(GameManager gameManager)
     {
         this.gameManager = gameManager;
+    }
+
+    public void SetColor(Color color)
+    {
+        cursorImage.color = color;
     }
 
     private void updateCursorPosition(Vector2 currentPosition)

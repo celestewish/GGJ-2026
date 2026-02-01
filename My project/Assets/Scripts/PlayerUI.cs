@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -12,19 +13,33 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Slider specialBar;
     [SerializeField] Image knockedOutSprite;
     [SerializeField] Image readySpecial;
-   
-    
+    [SerializeField] GameObject[] playerNums;
+    [SerializeField] GameObject[] characterNames;
+
+
 
     public int playerID = -1;
 
     public void InitSpecialBar(int playerID, CharacterData data)
     {
-        characterNameText.text = data.characterName;
+        //characterNameText.text = data.characterName;
         maskSprite.sprite = data.maskSprite;
         specialBar.value = 0;
 
         this.playerID = playerID;
-        playerNumText.text = (playerID + 1).ToString();
+        //playerNumText.text = (playerID + 1).ToString();
+
+        for (int i = 0; i < playerNums.Length; i++)
+        {
+            playerNums[i].SetActive(false);
+        }
+        playerNums[playerID].SetActive(true);
+
+        for (int i = 0; i < characterNames.Length; i++)
+        {
+            characterNames[i].SetActive(false);
+        }
+        characterNames[data.characterID].SetActive(true);
 
         knockedOutSprite.enabled = false;
     }

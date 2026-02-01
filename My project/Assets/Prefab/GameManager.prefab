@@ -53,6 +53,11 @@ MonoBehaviour:
   spawnPositions: []
   manager: {fileID: 0}
   gameSceneName: 
+  colors:
+  - {r: 0.96981126, g: 0.7082814, b: 0, a: 1}
+  - {r: 0.09945214, g: 1, b: 0, a: 1}
+  - {r: 0.96981126, g: 0, b: 0.7704326, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &2193100595285383195
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private int playersReady = 0;
     private int playersInGame = 0;
     public string gameSceneName;
+    public Color[] colors;
 
     private int playersStillAlive = 0;
     private PlayerData[] remainingPlayers;
@@ -157,7 +158,7 @@ public class GameManager : MonoBehaviour
             s.transform.SetParent(FindFirstObjectByType<Canvas>().transform);
 
             (s.transform as RectTransform).anchoredPosition = new Vector2(Screen.width / 2, Screen.height / 2);
-
+            s.SetColor(colors[p.playerIndex]);
             cursors.Add(s);
 
 

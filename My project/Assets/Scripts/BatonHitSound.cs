@@ -6,13 +6,13 @@ public class BatonHitSound : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("HurtBox") && collision.transform.parent != null && collision.transform.parent.name != currentPlayer.playerName)
+        if (collision.CompareTag("HurtBox") && collision.transform.parent.parent != null && collision.transform.parent.parent.name != currentPlayer.playerName)
         {
             // Notify parent LawManSpecial
             //var lawman = GetComponentInParent<LawManSpecial>();
             currentPlayer.OnBatonHit();
 
-            CharacterParentClass attackedPlayer = collision.transform.parent.GetComponent<CharacterParentClass>();
+            CharacterParentClass attackedPlayer = collision.transform.parent.parent.GetComponent<CharacterParentClass>();
             Debug.Log("Attacked player");
             Vector2 direction = (collision.transform.parent.position - transform.parent.position).normalized;
             attackedPlayer.TakeKnockback(direction, currentPlayer.GetBatonHitStrength());

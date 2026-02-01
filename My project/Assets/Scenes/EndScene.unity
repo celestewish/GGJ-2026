@@ -1415,6 +1415,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CursorSpawner
   manager: {fileID: 1892563570}
   cursorPrefab: {fileID: 9026975896703004495, guid: 76f79d9c29883f94389debb5dd0d6aac, type: 3}
+  colors:
+  - {r: 0.96981126, g: 0.7082814, b: 0, a: 1}
+  - {r: 0.09945214, g: 1, b: 0, a: 1}
+  - {r: 0.96981126, g: 0, b: 0.7704326, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
 --- !u!4 &1896565275
 Transform:
   m_ObjectHideFlags: 0

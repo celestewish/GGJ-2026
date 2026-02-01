@@ -6,6 +6,7 @@ public class CursorSpawner : MonoBehaviour
 
     [SerializeField] PlayerInputManager manager;
     [SerializeField] GameObject cursorPrefab;
+    public Color[] colors;
 
     GameManager gameManager;
 
@@ -68,6 +69,7 @@ public class CursorSpawner : MonoBehaviour
         s.transform.SetParent(FindFirstObjectByType<Canvas>().transform);
 
         (s.transform as RectTransform).anchoredPosition = new Vector2(Screen.width / 2, Screen.height / 2);
+        s.SetColor(colors[input.playerIndex]);
     }
 
     /*private void OnDisable()
