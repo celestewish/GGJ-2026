@@ -269,11 +269,20 @@ MonoBehaviour:
   hurtbox: {fileID: 6398393015946629712}
   currentSpecial: 0
   maxSpecial: 100
+  audioSource: {fileID: 0}
+  attackClip: {fileID: 0}
+  swingPunch: {fileID: 0}
+  successPunch: {fileID: 0}
   playerID: 
+  controllerID: 
+  specialBar: {fileID: 0}
   purpleClonePrefab: {fileID: 2882123929219272277, guid: f4ed87a615883c244bfd3fed86d0e2a2, type: 3}
   greenClonePrefab: {fileID: 538916734279263991, guid: 1cdf691dcb2ded649aec9addf62ca8c5, type: 3}
   goldClonePrefab: {fileID: 0}
   spawnOffset: {x: 0.5, y: 0}
+  tricksterSound: {fileID: 8300000, guid: f969b537eecbb3941b46afa43b2a6fba, type: 3}
+  punch: {fileID: 8300000, guid: fa4da1efec4d68c4194d28771e2ad1a6, type: 3}
+  succPunch: {fileID: 8300000, guid: 0ab96e399d7846e4fb3d257dd0483e48, type: 3}
 --- !u!114 &7320073165477694839
 MonoBehaviour:
   m_ObjectHideFlags: 0

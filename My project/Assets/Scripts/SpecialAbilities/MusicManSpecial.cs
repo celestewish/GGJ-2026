@@ -8,12 +8,21 @@ public class MusicManSpecial : CharacterParentClass
     public LayerMask enemyLayer;
 
     [Header("Audio")]
-    public AudioSource audioSource;
     public AudioClip specialSfx;
     [Range(0f, 1f)] public float sfxVolume = 1f;
+    public AudioClip punch;
+    public AudioClip succPunch;
 
     [Header("Shockwave Prefab")]
     public GameObject shockwavePrefab;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        swingPunch = punch;
+        successPunch = succPunch;
+    }
+
 
     // Inherited method
     protected override void PerformSpecial()

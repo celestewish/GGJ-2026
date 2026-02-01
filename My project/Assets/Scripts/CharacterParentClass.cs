@@ -25,6 +25,12 @@ public class CharacterParentClass : MonoBehaviour
     [SerializeField] protected float currentSpecial = 1f;
     [SerializeField] protected float maxSpecial = 100f;
 
+    [Header("Audio")]
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected AudioClip attackClip;
+    [SerializeField] protected AudioClip swingPunch;
+    [SerializeField] protected AudioClip successPunch;
+
     public string playerID;
     public string controllerID;
 
@@ -37,7 +43,7 @@ public class CharacterParentClass : MonoBehaviour
     protected bool isAttacking = false;
     protected bool specialReady = false;
 
-    protected  void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         // Set drag to simulate friction
@@ -48,6 +54,10 @@ public class CharacterParentClass : MonoBehaviour
 
         currentSpecial = 1f;
         maxSpecial = 200f;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
 
     }
 
@@ -178,8 +188,26 @@ public class CharacterParentClass : MonoBehaviour
         Debug.Log(gameObject.name + " attacked with strength: " + hitStrength);
         // 1. Activate Hitbox Object via animation event or script
         hitBox.gameObject.SetActive(true);
-       
-      
+        if (audioSource != null && swingPunch != null)
+        {
+            audioSource.PlayOneShot(swingPunch);
+        }
+    }
+    protected void OnPunchHit()
+    {
+        if (audioSource != null && successPunch != null)
+        {
+            StartCoroutine(PlayHitDelayed(successPunch, 0.2f));
+        }
+    }
+    private IEnumerator PlayHitDelayed(AudioClip clip, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (audioSource != null)
+        {
+            Debug.Log("Clip played");
+            audioSource.PlayOneShot(clip);
+        }
     }
     public float GetStrength()
     {
@@ -202,8 +230,10 @@ public class CharacterParentClass : MonoBehaviour
     {
         Debug.Log("RAHHHHHH");
         //PUT character special code here.
-      
-
+        if (audioSource != null && attackClip != null)
+        {
+            audioSource.PlayOneShot(attackClip); // non?overlapping SFX [web:152][web:160]
+        }
     }
     // gain meter
     public void GainSpecial(float amount)

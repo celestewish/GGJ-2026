@@ -12,6 +12,19 @@ public class LawManSpecial : CharacterParentClass
     private float lastBatonTime = -999f;
     private bool isSwinging = false;
 
+    [Header("Audio")]
+    public AudioClip lawManSound;
+    public AudioClip lawManHitSound;
+    public AudioClip punch;
+    public AudioClip succPunch;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        swingPunch = punch;
+        successPunch = succPunch;
+    }
+
     // Instead of normal attack, LawMan swings his baton
     protected override void PerformAttack()
     {
@@ -33,6 +46,10 @@ public class LawManSpecial : CharacterParentClass
         isSwinging = true;
         batonObject.SetActive(true);
         hitBox.gameObject.SetActive(true);
+        if (audioSource != null && lawManSound != null)
+        {
+            audioSource.PlayOneShot(lawManSound); // non?overlapping SFX [web:152][web:160]
+        }
 
         // Decide facing direction:
         // Prefer lookInput (right stick / mouse), fall back to moveInput, then default right
@@ -62,5 +79,23 @@ public class LawManSpecial : CharacterParentClass
         batonObject.SetActive(false);
         hitBox.gameObject.SetActive(false);
         isSwinging = false;
+    }
+    public void OnBatonHit()
+    {
+        Debug.Log("Baton hit");
+
+        if (audioSource != null && lawManHitSound != null)
+        {
+            StartCoroutine(PlayHitDelayed(lawManHitSound, 0.2f));
+        }
+    }
+    private IEnumerator PlayHitDelayed(AudioClip clip, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (audioSource != null)
+        {
+            Debug.Log("Clip played");
+            audioSource.PlayOneShot(clip);
+        }
     }
 }

@@ -7,7 +7,20 @@ public class DrunkSpecial : CharacterParentClass
     [SerializeField] private float inversionChancePerSecond = 0.8f; // 0�1
     [SerializeField] private float inversionDuration = 5f;
 
+    [Header("Audio")]
+    public AudioClip drunkSpecial;
+    public AudioClip punch;
+    public AudioClip succPunch;
+
     private bool controlsInverted = false;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        attackClip = drunkSpecial;
+        swingPunch = punch;
+        successPunch = succPunch;
+    }
 
     //RAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     private void Start()
@@ -47,6 +60,11 @@ public class DrunkSpecial : CharacterParentClass
     // Inverts controls for a set number of seconds
     private IEnumerator InvertControlsTemporarily()
     {
+        // Play special sound if assigned
+        if (audioSource != null && attackClip != null)
+        {
+            audioSource.PlayOneShot(attackClip); // non‑overlapping SFX [web:152][web:160]
+        }
         controlsInverted = true;
         yield return new WaitForSeconds(inversionDuration);
         controlsInverted = false;

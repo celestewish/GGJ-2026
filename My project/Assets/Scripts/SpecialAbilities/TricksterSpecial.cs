@@ -10,8 +10,22 @@ public class TricksterSpecial : CharacterParentClass
     // Offset so it doesn’t spawn exactly on top of the player
     [SerializeField] private Vector2 spawnOffset = new Vector2(0.5f, 0f);
 
+    [Header("Audio")]
+    public AudioClip tricksterSound;
+    public AudioClip punch;
+    public AudioClip succPunch;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        attackClip = tricksterSound;
+        swingPunch = punch;
+        successPunch = succPunch;
+    }
+
     protected override void PerformSpecial()
     {
+        base.PerformSpecial();
         // Finds prefab and spawns it if possible
         GameObject prefabToSpawn = GetRandomClonePrefab();
         if (prefabToSpawn == null)
