@@ -8,6 +8,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterParentClass : MonoBehaviour
 {
+    private PlayerData playerData;
+
     [Header("Movement Settings")]
     [SerializeField] protected float Speed = 1f;
  //   [SerializeField] protected float acceleration = 50f;
@@ -31,7 +33,7 @@ public class CharacterParentClass : MonoBehaviour
     [SerializeField] protected AudioClip swingPunch;
     [SerializeField] protected AudioClip successPunch;
 
-    public string playerID;
+    public string playerName;
     public string controllerID;
 
     [SerializeField] protected SpecialBarManager specialBar; //this needs a slider ui
@@ -50,7 +52,7 @@ public class CharacterParentClass : MonoBehaviour
         rb.linearDamping = friction;
         rb.gravityScale = 0; // Assuming top-down; set to 1 for platformer
         hitBox.gameObject.SetActive(false);
-        playerID = gameObject.name;
+        playerName = gameObject.name;
 
         currentSpecial = 1f;
         maxSpecial = 200f;
@@ -59,6 +61,11 @@ public class CharacterParentClass : MonoBehaviour
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
 
+    }
+
+    public void SetPlayerData(PlayerData playerData)
+    {
+        this.playerData = playerData;
     }
 
     protected virtual void Update()
@@ -101,7 +108,7 @@ public class CharacterParentClass : MonoBehaviour
         lookDir = new Vector3(lookInput.x, lookInput.y, 0);
 
         //Apply different look code depending on controllerID
-        if (controllerID == "Mouse")
+        if (playerData.controlScheme == "Keyboard&Mouse")
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(lookDir);
             lookDir = (new Vector3(mousePos.x, mousePos.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized;

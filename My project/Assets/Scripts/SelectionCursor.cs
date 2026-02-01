@@ -11,7 +11,6 @@ public class SelectionCursor : MonoBehaviour
 {
     Vector2 nav;
     PlayerInput pi;
-    string cScheme;
     public int sensitivity = 10;
     private Mouse vMouse;
     private RectTransform rt;
@@ -20,6 +19,13 @@ public class SelectionCursor : MonoBehaviour
 
     Dictionary<int, GameObject> hoveringObjects = new Dictionary<int, GameObject>();
 
+    private GameManager gameManager;
+    private MainMenuManager mainMenuManager;
+
+    private CharacterData characterData;
+
+    private MaskSelection maskSelection;
+
     public void OnNavigate(InputValue iv)
     {
         nav = iv.Get<Vector2>();
@@ -27,10 +33,13 @@ public class SelectionCursor : MonoBehaviour
         if (pi.currentControlScheme.Equals("Gamepad"))
         {
             currentPos = vMouse.position.ReadValue();
-            Vector2 newPos = currentPos + nav * (sensitivity * 10) * Time.deltaTime;
+            Vector2 newPos = currentPos + nav * (sensitivity * 5) * Time.deltaTime;
+
+            newPos.x = Mathf.Clamp(newPos.x, 0, Screen.width);
+            newPos.y = Mathf.Clamp(newPos.y, 0, Screen.height);
+
             InputState.Change(vMouse.position, newPos);
             InputState.Change(vMouse.delta, nav);
-
    
             currentPos = newPos;
             //print(currentPos);
@@ -87,7 +96,38 @@ public class SelectionCursor : MonoBehaviour
             {
                 Debug.Log($"Clicked on {raycastResult.gameObject}");
                 ExecuteEvents.Execute(raycastResult.gameObject, pointer, ExecuteEvents.pointerClickHandler);
+
+                if (this.maskSelection == null)
+                {
+                    MaskSelection maskSelection = raycastResult.gameObject.transform.parent.GetComponent<MaskSelection>();
+                    if (maskSelection)
+                    {
+                        CharacterData characterData = maskSelection.GetCharacterData();
+
+                        if (gameManager.SetPlayerSelection(pi.playerIndex, characterData))
+                        {
+                            this.maskSelection = maskSelection;
+                            maskSelection.MaskSelected(pi.playerIndex);
+
+                            mainMenuManager.CheckGameReady();
+                        }
+                    }
+                }
             }
+        }
+    }
+
+    public void OnCancel(InputValue iv)
+    {
+        if(this.maskSelection != null)
+        {
+            this.maskSelection.MaskUnselected();
+            this.maskSelection = null;
+            this.characterData = null;
+
+            gameManager.UnsetPlayerSelection(pi.playerIndex);
+
+            mainMenuManager.CheckGameReady();
         }
     }
 
@@ -99,6 +139,8 @@ public class SelectionCursor : MonoBehaviour
         Canvas canvas = FindFirstObjectByType<Canvas>();
         canvasRT = canvas.GetComponent<RectTransform>();
         raycaster = canvas.GetComponent<GraphicRaycaster>();
+
+        mainMenuManager = FindFirstObjectByType<MainMenuManager>();
 
         if (pi.currentControlScheme.Equals("Gamepad"))
         {
@@ -123,14 +165,14 @@ public class SelectionCursor : MonoBehaviour
         InputSystem.RemoveDevice(vMouse);
     }
 
-    public void setControlScheme(string s)
+    public void SetGameManager(GameManager gameManager)
     {
-        cScheme = s;
+        this.gameManager = gameManager;
     }
 
     private void updateCursorPosition(Vector2 currentPosition)
     {
-        switch (cScheme)
+        switch (pi.currentControlScheme)
         {
             case "Keyboard&Mouse":
                 transform.position = nav;
