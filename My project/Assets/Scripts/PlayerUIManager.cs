@@ -5,11 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    /// <summary>
-    /// Need to have an id that sees what the player has selected. which will tel lmy boolean values what they need to be
-    /// they i need my method to through an array four times for assign each player.
-    /// </summary>
-    /// 
+
 
     [SerializeField] PlayerUI[] playerIcons;
     private int currentPlayerIcon;
@@ -152,6 +148,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P1_GO.enabled = false;
+                        
                     }
 
                 }
@@ -167,6 +164,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P1_GO.enabled = false;
+                       
                     }
                 }
                 else if (isTrickster)
@@ -181,6 +179,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P1_GO.enabled = false;
+                        
                     }
                 }
                 else if (isLawMan)
@@ -195,6 +194,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P1_GO.enabled = false;
+                      
                     }
                 }
                 break;
@@ -212,6 +212,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P2_GO.enabled = false;
+                        
                     }
 
                 }
@@ -227,6 +228,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P2_GO.enabled = false;
+                       
                     }
                 }
                 else if (isTrickster)
@@ -241,6 +243,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P2_GO.enabled = false;
+                        
                     }
                 }
                 else if (isLawMan)
@@ -255,6 +258,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P2_GO.enabled = false;
+                       
                     }
                 }
                 break;
@@ -272,6 +276,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P3_GO.enabled = false;
+                       
                     }
 
                 }
@@ -287,6 +292,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P3_GO.enabled = false;
+                       
                     }
                 }
                 else if (isTrickster)
@@ -301,6 +307,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P3_GO.enabled = false;
+                        
                     }
                 }
                 else if (isLawMan)
@@ -315,6 +322,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P3_GO.enabled = false;
+                      
                     }
                 }
 
@@ -333,6 +341,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P4_GO.enabled = false;
+                       
                     }
 
                 }
@@ -348,6 +357,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P4_GO.enabled = false;
+                       
                     }
                 }
                 else if (isTrickster)
@@ -362,6 +372,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P4_GO.enabled = false;
+                       
                     }
                 }
                 else if (isLawMan)
@@ -376,6 +387,7 @@ public class PlayerUIManager : MonoBehaviour
                     else
                     {
                         P4_GO.enabled = false;
+                       
                     }
                 }
                 break;

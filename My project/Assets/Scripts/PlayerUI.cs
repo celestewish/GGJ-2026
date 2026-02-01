@@ -9,6 +9,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] Image maskSprite;
     [SerializeField] Slider specialBar;
     [SerializeField] Image knockedOutSprite;
+    [SerializeField] Image readySpecial;
 
     public int playerID = -1;
 
@@ -34,5 +35,17 @@ public class PlayerUI : MonoBehaviour
         knockedOutSprite.enabled = true;
 
         //can add more knockout visuals here
+    }
+     public void IsReady(float amount, float Max)
+    {
+        if (amount >= Max)
+        {
+           readySpecial.enabled = true;
+        }
+        else
+        {
+            readySpecial.enabled = false;
+            
+        }
     }
 }
