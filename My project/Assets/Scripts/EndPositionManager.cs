@@ -22,7 +22,8 @@ public class EndPositionManager : MonoBehaviour
                     endPositions[i].SetCharacter(playerPositions[i].characterData);
                 } else
                 {
-                    endPositions[i].gameObject.SetActive(false);
+                    if(i < endPositions.Length - 1)
+                        endPositions[i].gameObject.SetActive(false);
                 }
             }
         }
