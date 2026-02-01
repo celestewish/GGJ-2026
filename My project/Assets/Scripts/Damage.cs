@@ -8,7 +8,7 @@ public class Damage : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if(collision.CompareTag("HurtBox") && collision.transform.parent != null && collision.transform.parent.name != currentPlayer.playerID)
+        if(collision.CompareTag("HurtBox") && collision.transform.parent != null && collision.transform.parent.name != currentPlayer.playerName)
         {
             //Weight
             CharacterParentClass attackedPlayer = collision.transform.parent.GetComponent<CharacterParentClass>();

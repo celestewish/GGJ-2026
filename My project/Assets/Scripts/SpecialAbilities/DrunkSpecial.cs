@@ -55,6 +55,13 @@ public class DrunkSpecial : CharacterParentClass
         }
 
         rb.linearVelocity = finalInput * Speed;
+
+        //Apply gradual rotation based on weight factor
+        if (lookDir != Vector3.zero)
+        {
+            Quaternion rot = Quaternion.FromToRotation(transform.up, lookDir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot * transform.rotation, 1 / weight * Time.deltaTime * 25);
+        }
     }
 
     // Inverts controls for a set number of seconds

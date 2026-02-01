@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &93893297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 93893298}
+  m_Layer: 0
+  m_Name: Spawn2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &93893298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93893297}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.499, y: -1.517, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1132613176}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &283196991
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &529138092
 Rigidbody2D:
   serializedVersion: 5
@@ -493,7 +524,11 @@ MonoBehaviour:
   hurtbox: {fileID: 1038957300}
   currentSpecial: 0
   maxSpecial: 100
-  playerID: 
+  audioSource: {fileID: 0}
+  attackClip: {fileID: 0}
+  swingPunch: {fileID: 0}
+  successPunch: {fileID: 0}
+  playerName: 
   controllerID: 
   specialBar: {fileID: 0}
 --- !u!212 &529138094
@@ -570,6 +605,37 @@ Transform:
   - {fileID: 1530119659}
   - {fileID: 1038957302}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &664338621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 664338622}
+  m_Layer: 0
+  m_Name: Spawn4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &664338622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 664338621}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.277, y: 1.047, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1132613176}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &796484522
 GameObject:
@@ -676,6 +742,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &871171182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 871171183}
+  m_Layer: 0
+  m_Name: Spawn3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &871171183
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871171182}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.499, y: 1.047, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1132613176}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1038957300
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,6 +851,41 @@ Transform:
   m_Children: []
   m_Father: {fileID: 529138095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1132613175
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1132613176}
+  m_Layer: 0
+  m_Name: Spawn Positions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1132613176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132613175}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1421522884}
+  - {fileID: 93893298}
+  - {fileID: 871171183}
+  - {fileID: 664338622}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1358590624
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +918,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpawn
   players:
   - {fileID: 4773216038579192081, guid: 5797cc49e41e8ac4fa0ec232e9febecd, type: 3}
+  spawnPositions:
+  - {fileID: 1421522884}
+  - {fileID: 93893298}
+  - {fileID: 871171183}
+  - {fileID: 664338622}
 --- !u!114 &1358590626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,7 +938,7 @@ MonoBehaviour:
   m_NotificationBehavior: 2
   m_MaxPlayerCount: 4
   m_AllowJoining: 1
-  m_JoinBehavior: 0
+  m_JoinBehavior: 2
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -856,6 +993,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1421522883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1421522884}
+  m_Layer: 0
+  m_Name: Spawn1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1421522884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421522883}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.435, y: -1.517, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1132613176}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1530119657
 GameObject:
@@ -1599,7 +1767,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 605, y: 11.999998}
+  m_AnchoredPosition: {x: 605, y: -66.999985}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1921232412816276353
@@ -1965,7 +2133,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 404, y: 11.999998}
+  m_AnchoredPosition: {x: 404, y: -66.999985}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3286414477814149226
@@ -2049,7 +2217,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a075b52444ce99542bb55d9cef25bb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialBarManager
-  Bar: {fileID: 2762732328234394727}
+  P1_GO: {fileID: 0}
+  P2_GO: {fileID: 0}
+  P3_GO: {fileID: 0}
+  P4_GO: {fileID: 0}
+  P1_MainImage: {fileID: 0}
+  P2_MainImage: {fileID: 0}
+  P3_MainImage: {fileID: 0}
+  P4_MainImage: {fileID: 0}
+  P1_Text: {fileID: 0}
+  P2_Text: {fileID: 0}
+  P3_Text: {fileID: 0}
+  P4_Text: {fileID: 0}
+  P1_Slider: {fileID: 0}
+  P2_Slider: {fileID: 0}
+  P3_Slider: {fileID: 0}
+  P4_Slider: {fileID: 0}
+  musicManMask: {fileID: 0}
+  DrunkMask: {fileID: 0}
+  TricksterMask: {fileID: 0}
+  LawManMask: {fileID: 0}
+  MusicManBar: {fileID: 0}
+  DrunkBar: {fileID: 0}
+  TricksterBar: {fileID: 0}
+  LawManBar: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!224 &3409988091759642181
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2157,7 +2349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 197, y: 11.999998}
+  m_AnchoredPosition: {x: 197, y: -66.999985}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3899251983088274175
@@ -2417,7 +2609,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a075b52444ce99542bb55d9cef25bb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialBarManager
-  Bar: {fileID: 5763155209851736665}
+  P1_GO: {fileID: 0}
+  P2_GO: {fileID: 0}
+  P3_GO: {fileID: 0}
+  P4_GO: {fileID: 0}
+  P1_MainImage: {fileID: 0}
+  P2_MainImage: {fileID: 0}
+  P3_MainImage: {fileID: 0}
+  P4_MainImage: {fileID: 0}
+  P1_Text: {fileID: 0}
+  P2_Text: {fileID: 0}
+  P3_Text: {fileID: 0}
+  P4_Text: {fileID: 0}
+  P1_Slider: {fileID: 0}
+  P2_Slider: {fileID: 0}
+  P3_Slider: {fileID: 0}
+  P4_Slider: {fileID: 0}
+  musicManMask: {fileID: 0}
+  DrunkMask: {fileID: 0}
+  TricksterMask: {fileID: 0}
+  LawManMask: {fileID: 0}
+  MusicManBar: {fileID: 0}
+  DrunkBar: {fileID: 0}
+  TricksterBar: {fileID: 0}
+  LawManBar: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!1 &5173288887589463084
 GameObject:
   m_ObjectHideFlags: 0
@@ -3234,7 +3450,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a075b52444ce99542bb55d9cef25bb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialBarManager
-  Bar: {fileID: 7132322852959455948}
+  P1_GO: {fileID: 0}
+  P2_GO: {fileID: 0}
+  P3_GO: {fileID: 0}
+  P4_GO: {fileID: 0}
+  P1_MainImage: {fileID: 0}
+  P2_MainImage: {fileID: 0}
+  P3_MainImage: {fileID: 0}
+  P4_MainImage: {fileID: 0}
+  P1_Text: {fileID: 0}
+  P2_Text: {fileID: 0}
+  P3_Text: {fileID: 0}
+  P4_Text: {fileID: 0}
+  P1_Slider: {fileID: 0}
+  P2_Slider: {fileID: 0}
+  P3_Slider: {fileID: 0}
+  P4_Slider: {fileID: 0}
+  musicManMask: {fileID: 0}
+  DrunkMask: {fileID: 0}
+  TricksterMask: {fileID: 0}
+  LawManMask: {fileID: 0}
+  MusicManBar: {fileID: 0}
+  DrunkBar: {fileID: 0}
+  TricksterBar: {fileID: 0}
+  LawManBar: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!222 &7781805158543592697
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3312,7 +3552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 12}
+  m_AnchoredPosition: {x: 0, y: -67}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8264323802794320980
@@ -3393,7 +3633,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a075b52444ce99542bb55d9cef25bb74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpecialBarManager
-  Bar: {fileID: 8996326836955631891}
+  P1_GO: {fileID: 0}
+  P2_GO: {fileID: 0}
+  P3_GO: {fileID: 0}
+  P4_GO: {fileID: 0}
+  P1_MainImage: {fileID: 0}
+  P2_MainImage: {fileID: 0}
+  P3_MainImage: {fileID: 0}
+  P4_MainImage: {fileID: 0}
+  P1_Text: {fileID: 0}
+  P2_Text: {fileID: 0}
+  P3_Text: {fileID: 0}
+  P4_Text: {fileID: 0}
+  P1_Slider: {fileID: 0}
+  P2_Slider: {fileID: 0}
+  P3_Slider: {fileID: 0}
+  P4_Slider: {fileID: 0}
+  musicManMask: {fileID: 0}
+  DrunkMask: {fileID: 0}
+  TricksterMask: {fileID: 0}
+  LawManMask: {fileID: 0}
+  MusicManBar: {fileID: 0}
+  DrunkBar: {fileID: 0}
+  TricksterBar: {fileID: 0}
+  LawManBar: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!222 &8492874931272046374
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3573,3 +3837,4 @@ SceneRoots:
   - {fileID: 1358590627}
   - {fileID: 796484526}
   - {fileID: 283196994}
+  - {fileID: 1132613176}

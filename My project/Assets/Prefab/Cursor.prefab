@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b22c97d13629f2c45a110fb4f8393a10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionCursor
-  sensitivity: 10
+  sensitivity: 50
 --- !u!225 &8341305838527923555
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9026975896703004495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 424b6720ff5999446843ba414e58a907, type: 3}
   m_Name: 
