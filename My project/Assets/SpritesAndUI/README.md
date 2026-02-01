@@ -16,3 +16,4 @@ UI FOLDER INFORMATION:
 - Selection Screen -> All UI art that can be used in the screen where players are picking their mask.
 - Game Screen -> All UI art that can be used in the actually main game screen.
 - Main Screen -> All UI art that can be used in the main menu screen.
+- End Screen -> All  UI  art that can be used in the end screen.
