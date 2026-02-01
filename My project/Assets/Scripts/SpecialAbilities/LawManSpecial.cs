@@ -4,6 +4,7 @@ using UnityEngine;
 public class LawManSpecial : CharacterParentClass
 {
     [Header("Baton Settings")]
+    [SerializeField] private float batonHitStrength = 15;
     [SerializeField] private GameObject batonObject;
     [SerializeField] private float batonSwingAngle = 90f;
     [SerializeField] private float batonSwingTime = 0.25f;
@@ -26,13 +27,18 @@ public class LawManSpecial : CharacterParentClass
     }
 
     // Instead of normal attack, LawMan swings his baton
-    protected override void PerformAttack()
+    protected override void PerformSpecial()
     {
         if (isSwinging) return;
         if (Time.time < lastBatonTime + batonCooldown) return;
 
         lastBatonTime = Time.time;
         StartCoroutine(BatonSwingCoroutine());
+    }
+
+    public float GetBatonHitStrength()
+    {
+        return batonHitStrength;
     }
 
     private IEnumerator BatonSwingCoroutine()

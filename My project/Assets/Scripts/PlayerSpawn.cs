@@ -7,11 +7,13 @@ public class PlayerSpawn : MonoBehaviour
 {
 
     int index = 0;
-    [SerializeField] List<GameObject> players = new List<GameObject>();
     [SerializeField] Transform[] spawnPositions;
+    [SerializeField] PlayerUIManager specialBarManager;
     PlayerInputManager manager;
 
     PlayerData[] playerDatas;
+
+    CharacterParentClass[] players;
 
      void Start()
     {
@@ -20,7 +22,7 @@ public class PlayerSpawn : MonoBehaviour
         manager.playerPrefab = players[index];*/
     }
 
-    public void SpawnPlayers(PlayerData[] playerDatas, GameObject[] characterPrefabs)
+    public CharacterParentClass[] SpawnPlayers(PlayerData[] playerDatas, GameObject[] characterPrefabs)
     {
         if(manager == null)
         {
@@ -29,6 +31,9 @@ public class PlayerSpawn : MonoBehaviour
         } 
 
         this.playerDatas = playerDatas;
+
+        players = new CharacterParentClass[playerDatas.Length];
+
         for (int i = 0; i < playerDatas.Length; i++)
         {
             PlayerData current = playerDatas[i];
@@ -40,6 +45,8 @@ public class PlayerSpawn : MonoBehaviour
         }
 
         manager.DisableJoining();
+
+        return players;
     }
 
     public void SwitchtoNextSpawnCharacter(PlayerInput input)
@@ -48,6 +55,8 @@ public class PlayerSpawn : MonoBehaviour
         spawnedCharacter.SetPlayerData(playerDatas[input.playerIndex]);
 
         spawnedCharacter.transform.position = spawnPositions[input.playerIndex].position;
+
+        players[input.playerIndex] = spawnedCharacter;
 
         /*index++;
 

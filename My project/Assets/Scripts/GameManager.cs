@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
     private int playersInGame = 0;
     public string gameSceneName;
 
+    private int playersStillAlive = 0;
+    private PlayerData[] remainingPlayers;
+    private PlayerData[] gameEndPositions = new PlayerData[4];
+
     List<SelectionCursor> cursors = new List<SelectionCursor>();
 
     private GameState currentState = GameState.Menu;
@@ -39,6 +43,8 @@ public class GameManager : MonoBehaviour
         if (currentState == GameState.Game)
         {
             populatePlayersInGame();
+            remainingPlayers = pDataArray;
+            playersStillAlive = playersInGame;
         }
     }
 
@@ -49,6 +55,7 @@ public class GameManager : MonoBehaviour
             if (pDataArray[i].devices == null)
             {
                 pDataArray[i] = new PlayerData(-1, "", null);
+                gameEndPositions[i] = new PlayerData(-1, "", null);
             }
         }
 
@@ -91,7 +98,7 @@ public class GameManager : MonoBehaviour
         PlayerSpawn playerSpawn = FindFirstObjectByType<PlayerSpawn>();
         if(playerSpawn)
         {
-            playerSpawn.SpawnPlayers(pDataArray, playerPrefabArray);
+            activePlayerArray = playerSpawn.SpawnPlayers(pDataArray, playerPrefabArray);
         }
 
         /*for(int i = 0; i < 4; i++)
@@ -121,6 +128,34 @@ public class GameManager : MonoBehaviour
     public void modifyPlayerStat(int player, int stat, int value, bool addative)
     {
         activePlayerArray[player].changeStat(stat, value, addative);
+    }
+
+    public void KnockoutPlayer(PlayerData player)
+    {
+        gameEndPositions[playersStillAlive - 1] = player;
+        remainingPlayers[player.playerIndex] = new PlayerData(-1, "", null);
+        playersStillAlive--;
+
+        if(playersStillAlive == 1)
+        {
+            for(int i = 0; i < remainingPlayers.Length; i++)
+            {
+                if (remainingPlayers[i].playerIndex != -1)
+                {
+                    print(remainingPlayers[i].playerIndex + " - " + remainingPlayers[i].characterData.characterName);
+                    gameEndPositions[playersStillAlive - 1] = remainingPlayers[i];
+                    print(gameEndPositions[playersStillAlive - 1].playerIndex + " - " + gameEndPositions[playersStillAlive - 1].characterData.characterName);
+                    break;
+                }
+            }
+
+            //handle game end
+            SceneManager.LoadScene("EndScene");
+        }
+    }
+    public PlayerData[] GetGameEndPlayerPositions()
+    {
+        return gameEndPositions;
     }
 
     public bool SetPlayerSelection(int playerIndex, CharacterData data)
